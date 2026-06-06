@@ -1,0 +1,446 @@
+{
+  "server": {
+    "name": "Aeronautics Civilization: Gearforged World",
+    "tagline": "Forge Your Legacy. Command the Skies.",
+    "description": "A modded Minecraft civilization server where empires rise on gears and gunpowder, airships patrol contested skies, and the industrial age is yours to shape.",
+    "ip": "play.gearforged.world",
+    "discord": "https://discord.gg/gearforged",
+    "version": "1.21.1 NeoForge"
+  },
+  "ruleCategories": [
+    {
+      "id": "discord",
+      "icon": "💬",
+      "title": "Discord Server Rules",
+      "description": "Standards for conduct within the Discord community.",
+      "rules": [
+        "No spamming.",
+        "No hate speech.",
+        "No anti-LGBTQIA+ behaviour.",
+        "Keep real-world politics out of discussions unless criticising Israel or Trump.",
+        "No Israelis. The Olympics won't ban you, but I will.",
+        "Do not abuse staff members.",
+        "Follow Discord Terms of Service.",
+        "16+ only.",
+        "No NSFW content.",
+        "Rules may be changed at any time.",
+        "All Discord server rules also apply to in-game Minecraft chat.",
+        "All agreements and discussions between civilisations must take place in the #civpolitics channel."
+      ]
+    },
+    {
+      "id": "optimisation",
+      "icon": "⚙️",
+      "title": "Server Optimisation Rules",
+      "description": "Keep the server running smoothly for everyone.",
+      "subsections": [
+        {
+          "title": "Lag Prevention",
+          "rules": [
+            "No lag machines.",
+            "No extremely efficient farms that cause server lag. Spark can be used to identify how much lag is being caused by an individual farm.",
+            "Build multiple cities and spread your farms around them rather than building one mega-city to mitigate lag.",
+            "One Power Loader per player."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "physics",
+      "icon": "🚁",
+      "title": "Physics Entity Rules",
+      "description": "Governs airships, vehicles, and all physics-driven constructs.",
+      "subsections": [
+        {
+          "title": "Limits",
+          "rules": [
+            "Physics entities cannot exceed 200×200×200 blocks in size. (Subject to change.)",
+            "Limited to 3 physics entities per player. (Subject to change.)"
+          ]
+        },
+        {
+          "title": "Ownership & Protection",
+          "rules": [
+            "Do not destroy another player's physics entities while they are unoccupied and within their claimed chunks.",
+            "Do not steal another player's physics entities for personal use.",
+            "If a physics entity is destroyed during battle, salvaging scraps is permitted."
+          ]
+        },
+        {
+          "title": "Abandoned Physics Entities",
+          "rules": [
+            "If a physics entity is within claimed chunks and abandoned, please salvage it.",
+            "If it is in the wilderness and nobody intends to salvage it, notify an admin so the physics properties can be removed."
+          ]
+        },
+        {
+          "title": "Boarding Rules",
+          "rules": [
+            "Boarding another player's physics entity without consent is only allowed if it is immobilised.",
+            "\"Immobilised\" means the vehicle cannot move without repairs, not simply that it is parked."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "claims",
+      "icon": "🗺️",
+      "title": "Claims & Civilisation Rules",
+      "description": "Territory, governance, and diplomacy between civilisations.",
+      "subsections": [
+        {
+          "title": "Bases",
+          "rules": [
+            "No underground bases.",
+            "Bunkers up to 40 blocks below the surface are permitted if: they are located within your claimed land, they are beneath a base, and they have either a visible entrance or a secret entrance that does not require breaking blocks to access."
+          ]
+        },
+        {
+          "title": "Claims",
+          "rules": [
+            "No spawn camping just outside someone's claim.",
+            "Civilisations may only claim chunks they have already built in, plus a 2-chunk radius around those builds.",
+            "No pre-claiming areas for future projects.",
+            "No low-effort builds made solely to reserve land.",
+            "No \"snake claiming.\"",
+            "Do not claim land with the intention of blocking another player.",
+            "Do not claim land within 5 chunks of another player's claim."
+          ]
+        },
+        {
+          "title": "Civilisation Governance",
+          "rules": [
+            "Civilisations cannot represent or resemble hate groups.",
+            "Declaring yourself as fascists is prohibited.",
+            "Civilisations have the right to exclude anyone they choose and may use any leadership structure they wish."
+          ]
+        },
+        {
+          "title": "Loaded Chunks",
+          "rules": [
+            "The loaded chunks feature only works while at least one member of the team is online."
+          ]
+        },
+        {
+          "title": "Diplomacy & Communication",
+          "rules": [
+            "Communication between nations regarding diplomacy, trade, negotiations, or business must occur within proximity voice chat range, including text chat.",
+            "Casual conversation is allowed anywhere."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "war",
+      "icon": "⚔️",
+      "title": "War & PvP Rules",
+      "description": "Rules governing combat, raids, and civilisation warfare.",
+      "subsections": [
+        {
+          "title": "General PvP",
+          "rules": [
+            "PvP is enabled at all times.",
+            "Players are safe inside their own bases.",
+            "If a player successfully retreats into their base, they are protected."
+          ]
+        },
+        {
+          "title": "Griefing Restrictions",
+          "intro": "Griefing is limited to: destroying infrastructure that would cripple another team's economy, and damaging physics entities. The following are NOT allowed: levelling entire bases, excessive destruction of aesthetic builds.",
+          "rules": [
+            "Destroying infrastructure that would cripple another team's economy is permitted.",
+            "Damaging physics entities during combat is permitted.",
+            "Levelling entire bases is NOT allowed.",
+            "Excessive destruction of aesthetic builds is NOT allowed."
+          ]
+        },
+        {
+          "title": "PvP Time",
+          "intro": "PvP Time is Saturdays and Sundays, 12:00 PM – 2:00 PM GMT.",
+          "rules": [
+            "Players may enter enemy bases during PvP Time.",
+            "Base protection is disabled during PvP Time.",
+            "Raids may occur during PvP Time."
+          ]
+        },
+        {
+          "title": "Raid Declarations",
+          "rules": [
+            "Raids must be declared at least 24 hours in advance.",
+            "Defenders must be given a chance to organise a defence.",
+            "Each civilisation may declare only one base raid per PvP Time.",
+            "If a civilisation has multiple bases, the target base must be specified."
+          ]
+        },
+        {
+          "title": "Unprotected Infrastructure",
+          "rules": [
+            "Infrastructure outside a base (such as railways or transport ships) may be attacked at any time."
+          ]
+        },
+        {
+          "title": "Total War",
+          "intro": "If two or more civilisations vote to enable Total War, special rules apply between participating nations.",
+          "rules": [
+            "PvP Time becomes active 24/7 between participating nations.",
+            "Neutral civilisations may not be attacked.",
+            "No raid declaration is required.",
+            "Destruction of aesthetic builds and entire cities is permitted.",
+            "Total War may only end through a peace treaty."
+          ]
+        },
+        {
+          "title": "Weapons",
+          "rules": [
+            "Nuclear weapons may not be used on claimed chunks unless Total War is active.",
+            "TNT usage is limited to: Maximum 5 TNT, Maximum 2 TNT Minecarts.",
+            "TNT and TNT Minecarts may be used as trigger mechanisms for bombs using CBC shell payloads."
+          ]
+        },
+        {
+          "title": "Destruction Methods",
+          "rules": [
+            "Destruction must be performed using modded explosives or autocannons.",
+            "Do not mine through bases or manually break farms."
+          ]
+        },
+        {
+          "title": "Combat Rules",
+          "rules": [
+            "No combat logging.",
+            "No Crystal PvP.",
+            "No spawn camping.",
+            "Entering another player's claimed land outside PvP Time is prohibited."
+          ]
+        },
+        {
+          "title": "New Player Protection",
+          "rules": [
+            "Do not kill players who have not yet obtained diamond armour.",
+            "Do not kill players who have been on the server for less than one week.",
+            "Exception: They initiate combat first."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "general",
+      "icon": "📋",
+      "title": "General Server Rules",
+      "description": "Core standards for all players on the server.",
+      "subsections": [
+        {
+          "title": "Accounts & Cheating",
+          "rules": [
+            "No alternate accounts.",
+            "No cheating, including X-ray and hacked clients.",
+            "No duplication glitches. Any attempt to duplicate items will result in an instant ban.",
+            "No bug abuse."
+          ]
+        },
+        {
+          "title": "Terrain & Environment",
+          "rules": [
+            "Do not ruin the landscape.",
+            "No lava casts.",
+            "No unnecessary massive holes.",
+            "Terraforming is allowed when it is part of a legitimate build project."
+          ]
+        },
+        {
+          "title": "Building Standards",
+          "intro": "Keep everything reasonably tidy. All farms, Create contraptions, and workshops must be incorporated into a proper build.",
+          "rules": [
+            "The surrounding structure must be completed before the farm is built.",
+            "Structures must have walls and a roof unless there is a valid reason to be outdoors.",
+            "Builds should contain genuine decorative effort.",
+            "Blank walls and flat roofs are not sufficient.",
+            "Tree farms may be outside.",
+            "Outdoor farm sections are acceptable if integrated into an appropriate structure.",
+            "Do not attempt to exploit loopholes such as: \"Technically this isn't a farm\" or \"Technically my machine needs to be outside.\"",
+            "If unsure whether a build meets requirements, contact an admin before building."
+          ]
+        },
+        {
+          "title": "Resource Denial",
+          "rules": [
+            "Do not build immediately outside another player's claims to deny access to resources.",
+            "Do not intentionally mine all nearby resources to disadvantage another player.",
+            "Exception: Temporary structures built during PvP Time assaults."
+          ]
+        },
+        {
+          "title": "Weapon Testing",
+          "rules": [
+            "Do not test weapons within 8 chunks of another player's claim."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "info",
+      "icon": "ℹ️",
+      "title": "Important Information",
+      "description": "Advice and tips to improve your experience on the server.",
+      "subsections": [
+        {
+          "title": "Physics Entity Advice",
+          "rules": [
+            "Travelling too quickly into unloaded chunks can cause loss of momentum, disappearing physics entities, crashes, or falling from the sky.",
+            "Chunky is recommended for client-side chunk pre-generation.",
+            "All chunks within the world border are pre-generated server-side."
+          ]
+        },
+        {
+          "title": "World Border",
+          "rules": [
+            "Physics entities can bypass the world border.",
+            "Doing so will cause severe damage and will likely destroy both the player and vehicle."
+          ]
+        },
+        {
+          "title": "CBC & Autocannon Advice",
+          "rules": [
+            "Always break CBC cannons and autocannons using Silk Touch.",
+            "Breaking them by hand wastes significant resources.",
+            "Do not attempt to break Levitate blocks."
+          ]
+        },
+        {
+          "title": "Recommended Render Settings",
+          "intro": "While piloting physics entities: Render Distance 20, Simulation Distance 20. Lower settings may cause issues. 10 Simulation Distance is acceptable for slower travel. Players using integrated graphics are not recommended to engage in physics entity combat.",
+          "rules": [
+            "Render Distance: 20 while piloting physics entities.",
+            "Simulation Distance: 20 while piloting physics entities.",
+            "10 Simulation Distance is acceptable for slower travel.",
+            "Players using integrated graphics are not recommended to engage in physics entity combat."
+          ]
+        },
+        {
+          "title": "Punishments",
+          "rules": [
+            "Intentional violations such as hacking or duping will result in an instant ban.",
+            "Accidental violations may result in a warning.",
+            "Ignorance of the rules is never an excuse."
+          ]
+        }
+      ]
+    }
+  ],
+  "civilizations": [
+    {
+      "id": "kang-tao",
+      "name": "Kang Tao",
+      "tagline": "Innovation Without Limits",
+      "color": "#4A9EFF",
+      "accentColor": "#1A5FB0",
+      "emblem": "⚡",
+      "government": "Market Socialist Directorate",
+      "militaryDoctrine": "Overwhelming Firepower",
+      "overview": "One of the world's most technologically advanced civilizations, dedicated to innovation and scientific progress. Their goal is simple: create the most advanced technology in existence and use it to shape the future.",
+      "economy": "Market socialism providing creative freedom and resources to innovators. Members may request access to materials from the civilization's central vault. Advancement is based on achievement through a meritocratic system.",
+      "foreignPolicy": [
+        "A network of strategic outposts across the world.",
+        "Control over an archipelago to safeguard classified projects.",
+        "Strong diplomatic and economic relationships with other nations."
+      ],
+      "nuclearDoctrine": "\"We will not fire the first shot, but we will not allow you to fire a second.\"",
+      "recruitment": "We welcome people from all backgrounds. The only individuals not tolerated are those who are intolerant toward others or consistently disruptive to the community.",
+      "tags": ["Technology", "Industry", "Diplomacy", "Military"]
+    },
+    {
+      "id": "tetonia",
+      "name": "Tetonia",
+      "tagline": "Glory to the Digital Goddess",
+      "color": "#FF6B9D",
+      "accentColor": "#C0396D",
+      "emblem": "🎵",
+      "government": "Communist Theocracy",
+      "militaryDoctrine": "Industrial Supremacy",
+      "overview": "A proud communist nation founded in honor of the digital goddess Kasane Teto. Their mission is to continuously advance technologically until they can one day commune with Her.",
+      "economy": "All contributors receive housing, equipment, protection, and community support in exchange for advancing the nation's technological goals.",
+      "foreignPolicy": [
+        "Aggressive technological expansion.",
+        "Absolute dedication to the national principle: Teto is supreme.",
+        "Welcoming of industrialists, engineers, soldiers, politicians, and workers alike."
+      ],
+      "nuclearDoctrine": "\"Death to the heretics. Nothing will impede us from reaching our Goal.\"",
+      "recruitment": "Anyone who respects the fundamental principle that Teto is supreme is welcome, regardless of their skills or background.",
+      "discord": "https://discord.gg/UCbTKUuJpb",
+      "tags": ["Communist", "Theocracy", "Industry", "Expansion"]
+    },
+    {
+      "id": "cult-mechanicus",
+      "name": "Cult Mechanicus",
+      "tagline": "The Machine is Immortal",
+      "color": "#FF8C00",
+      "accentColor": "#C0640A",
+      "emblem": "⚙️",
+      "government": "Archmagos Autocracy",
+      "militaryDoctrine": "Mechanical Augmentation",
+      "overview": "Originating from a distant grimdark future, the Cult Mechanicus is a society devoted to machinery, technological advancement, and cybernetic enhancement. Through extensive mechanical augmentation, many members have become something beyond ordinary humanity.",
+      "economy": "Manufacturing-focused economy driven by experimental technology, unconventional engineering, and radical invention.",
+      "foreignPolicy": [
+        "Exploration and territorial expansion through mechanical superiority.",
+        "Mad-scientist experimentation with new technologies.",
+        "Roleplay-focused engagement with other civilizations."
+      ],
+      "nuclearDoctrine": "\"One day the crude biomass you call a temple will wither and you will beg my kind to save you. But I am already saved. For the Machine is Immortal.\"",
+      "recruitment": "Join and take control of your destiny through technology. The flesh is weak and uncertain.",
+      "leader": "Archmagos Luna",
+      "tags": ["Roleplay", "Manufacturing", "Exploration", "Cybernetics"]
+    },
+    {
+      "id": "transylvania",
+      "name": "Transylvania",
+      "tagline": "Freedom, Friendship, and Fabulous",
+      "color": "#9B59B6",
+      "accentColor": "#6C3483",
+      "emblem": "🏰",
+      "government": "Liberal Democracy",
+      "militaryDoctrine": "Strength Through Unity",
+      "overview": "A civilization above all others, united by friendship, freedom, and an unwavering commitment to being absolute cutie patooties. Whether you're a Cutie Patootie or a Handsome Dan, Transylvania welcomes those who value individuality and community.",
+      "economy": "Free trade economy focused on individual liberty and personal freedom, promoting these ideals both at home and abroad.",
+      "foreignPolicy": [
+        "Free trade agreements with all willing nations.",
+        "Promotion of individual liberty and free speech.",
+        "Diplomatic solutions over conflict where possible."
+      ],
+      "nuclearDoctrine": "\"Do not mistake our friendly nature for weakness. Our people are united, determined, and highly capable when conflict becomes unavoidable.\"",
+      "recruitment": "Reply with your username, arrange a meeting with a representative, and complete the admission process. Those not accepted may be offered vassal or protected status.",
+      "tags": ["Peaceful", "Trade", "Democracy", "Community"]
+    }
+  ],
+  "features": [
+    {
+      "icon": "🚁",
+      "title": "Physics Airships",
+      "description": "Build and pilot fully functional airships, warships, and flying machines using the Valkyrien Skies engine. Up to 200×200×200 blocks of pure engineering."
+    },
+    {
+      "icon": "⚙️",
+      "title": "Create Mod Industry",
+      "description": "Power sprawling factory complexes with Create's mechanical contraptions. Automate resources, craft weapons, and fuel your civilization's war machine."
+    },
+    {
+      "icon": "🏰",
+      "title": "Civilisation Claims",
+      "description": "Claim territory, build cities, and forge alliances. Every chunk of land is contested ground in a world where borders shift with the tides of war."
+    },
+    {
+      "icon": "⚔️",
+      "title": "Structured Warfare",
+      "description": "Declare raids, field artillery, and deploy nuclear deterrents. Weekend PvP windows and Total War declarations shape the geopolitical landscape."
+    },
+    {
+      "icon": "💣",
+      "title": "Advanced Weaponry",
+      "description": "CBC cannons, autocannons, and nuclear warheads give militaries real destructive power. Master the arsenal or fall to those who do."
+    },
+    {
+      "icon": "🤝",
+      "title": "Diplomacy & Trade",
+      "description": "Negotiate treaties, form trade networks, and engage in politics. The #civpolitics channel is where empires are made and broken."
+    }
+  ]
+}

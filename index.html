@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Aeronautics Civilization: Gearforged World — A modded Minecraft server where empires rise on gears and gunpowder. Build airships, forge alliances, wage war."
+    />
+    <meta property="og:title" content="Gearforged World — Forge Your Legacy" />
+    <meta
+      property="og:description"
+      content="A modded Minecraft civilization server. Build airships, claim territory, and shape the industrial age."
+    />
+    <title>Gearforged World — Forge Your Legacy</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      /* =====================================================
+       HOME-SPECIFIC STYLES
+       ===================================================== */
+
+      /* About section layout */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-2xl);
+        align-items: center;
+      }
+
+      .about-text p {
+        margin-bottom: var(--space-md);
+      }
+
+      .about-visual {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Server emblem / logo placeholder */
+      .server-emblem {
+        width: 280px;
+        height: 280px;
+        position: relative;
+      }
+
+      .server-emblem__ring {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: 2px solid var(--border);
+        position: absolute;
+        top: 0;
+        left: 0;
+        animation: emblemRotate 20s linear infinite;
+      }
+
+      .server-emblem__ring--outer {
+        border-color: rgba(196, 155, 69, 0.2);
+      }
+
+      .server-emblem__ring--inner {
+        width: 75%;
+        height: 75%;
+        top: 12.5%;
+        left: 12.5%;
+        border-color: rgba(196, 155, 69, 0.35);
+        animation-direction: reverse;
+        animation-duration: 14s;
+      }
+
+      /* Decorative tick marks on the ring */
+      .server-emblem__ring::before {
+        content: "";
+        position: absolute;
+        top: -3px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--brass);
+        box-shadow: 0 0 8px var(--brass);
+      }
+
+      @keyframes emblemRotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .server-emblem__core {
+        position: absolute;
+        inset: 20%;
+        background: radial-gradient(
+          circle,
+          rgba(196, 155, 69, 0.12) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: var(--space-sm);
+      }
+
+      .server-emblem__icon {
+        font-size: 4.5rem;
+        filter: drop-shadow(0 0 20px rgba(196, 155, 69, 0.5));
+        animation: iconFloat 4s ease-in-out infinite;
+      }
+
+      @keyframes iconFloat {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+
+      .server-emblem__label {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        letter-spacing: 0.2em;
+        color: var(--brass);
+        text-transform: uppercase;
+      }
+
+      /* Logo img if available */
+      .logo-img-wrapper {
+        position: absolute;
+        inset: 20%;
+        border-radius: 50%;
+        overflow: hidden;
+        display: none; /* shown via JS if logo.png is available */
+      }
+
+      .logo-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      /* Blueprint background decoration */
+      .blueprint-corner {
+        position: absolute;
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        color: rgba(196, 155, 69, 0.2);
+        letter-spacing: 0.05em;
+        line-height: 1.8;
+      }
+
+      .blueprint-corner--tl {
+        top: 0;
+        left: 0;
+        text-align: left;
+      }
+      .blueprint-corner--br {
+        bottom: 0;
+        right: 0;
+        text-align: right;
+      }
+
+      /* CTA banner */
+      .cta-banner {
+        background: linear-gradient(135deg, var(--iron-mid), var(--iron-light));
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: var(--space-2xl);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-banner::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          var(--brass-dark),
+          var(--brass),
+          var(--brass-dark)
+        );
+      }
+
+      .cta-banner__gear {
+        position: absolute;
+        font-size: 12rem;
+        opacity: 0.03;
+        right: -2rem;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+      }
+
+      .cta-banner h2 {
+        margin-bottom: var(--space-md);
+      }
+      .cta-banner p {
+        margin: 0 auto var(--space-xl);
+        max-width: 55ch;
+      }
+
+      .cta-actions {
+        display: flex;
+        gap: var(--space-md);
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      /* PvP time card */
+      .pvp-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-sm);
+        background: rgba(139, 58, 42, 0.15);
+        border: 1px solid rgba(139, 58, 42, 0.4);
+        border-radius: var(--radius-md);
+        padding: 0.4rem 0.9rem;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: #e07b39;
+        letter-spacing: 0.05em;
+      }
+
+      .pvp-badge::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #e07b39;
+        animation: pvpPulse 1.5s ease-in-out infinite;
+      }
+
+      @keyframes pvpPulse {
+        0%,
+        100% {
+          opacity: 1;
+          box-shadow: 0 0 0 0 rgba(224, 123, 57, 0.4);
+        }
+        50% {
+          opacity: 0.7;
+          box-shadow: 0 0 0 6px rgba(224, 123, 57, 0);
+        }
+      }
+
+      /* About grid responsive */
+      @media (max-width: 900px) {
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .about-visual {
+          order: -1;
+        }
+
+        .server-emblem {
+          width: 200px;
+          height: 200px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =====================================================
+       NAVIGATION
+       ===================================================== -->
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+      <div class="container nav__inner">
+        <a
+          href="index.html"
+          class="nav__logo"
+          aria-label="Gearforged World Home"
+        >
+          <div class="nav__logo-emblem" aria-hidden="true">⚙</div>
+          <div class="nav__logo-text">
+            Gearforged
+            <span class="nav__logo-sub">Aeronautics Civ</span>
+          </div>
+        </a>
+
+        <ul class="nav__links" role="list">
+          <li><a href="index.html" class="nav__link">Home</a></li>
+          <li><a href="civs.html" class="nav__link">Civilisations</a></li>
+          <li><a href="rules.html" class="nav__link">Rules</a></li>
+          <li><a href="guide.html" class="nav__link">Guide</a></li>
+          <li>
+            <a
+              href="#"
+              class="nav__cta nav__link"
+              data-copy-ip="play.gearforged.world"
+              >Join Server</a
+            >
+          </li>
+        </ul>
+
+        <button
+          class="nav__hamburger"
+          aria-label="Toggle mobile menu"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="nav__mobile" role="menu" aria-label="Mobile navigation">
+      <ul
+        role="list"
+        style="
+          list-style: none;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        "
+      >
+        <li><a href="index.html" class="nav__link">Home</a></li>
+        <li><a href="civs.html" class="nav__link">Civilisations</a></li>
+        <li><a href="rules.html" class="nav__link">Rules</a></li>
+        <li><a href="guide.html" class="nav__link">Guide</a></li>
+      </ul>
+      <a
+        href="#"
+        class="btn btn--primary"
+        data-copy-ip="play.gearforged.world"
+        style="margin-top: 0.5rem; width: fit-content"
+      >
+        ⚙ Join Server
+      </a>
+    </div>
+
+    <!-- =====================================================
+       HERO SECTION
+       ===================================================== -->
+    <section class="hero" aria-label="Hero section">
+      <!-- Animated background -->
+      <div class="hero__bg" aria-hidden="true"></div>
+
+      <!-- Decorative gear silhouettes -->
+      <div class="hero__gear hero__gear--1" aria-hidden="true">⚙</div>
+      <div class="hero__gear hero__gear--2" aria-hidden="true">⚙</div>
+
+      <div class="container">
+        <div class="hero__content">
+          <span class="hero__eyebrow"
+            >Minecraft 1.21.1 NeoForge · Civilization Server</span
+          >
+
+          <h1 class="hero__title display-title">
+            Forge Your
+            <span class="line-brass">Legacy.</span>
+            Command the Skies.
+          </h1>
+
+          <p class="hero__subtitle">
+            Build empires on gears and gunpowder. Pilot airships into battle.
+            Claim territory, forge alliances, and wage industrial war in a world
+            shaped entirely by its players.
+          </p>
+
+          <div class="hero__actions">
+            <a href="guide.html" class="btn btn--primary">⚙ Get Started</a>
+            <a href="civs.html" class="btn btn--secondary"
+              >View Civilisations</a
+            >
+          </div>
+
+          <div
+            class="hero__ip"
+            data-copy-ip="play.gearforged.world"
+            role="button"
+            tabindex="0"
+            aria-label="Click to copy server IP"
+          >
+            <span class="hero__ip-label">Server IP</span>
+            play.gearforged.world
+            <span style="opacity: 0.5; font-size: 0.75rem"
+              >⧉ Click to copy</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="hero__scroll" aria-hidden="true">
+        <div class="hero__scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+    </section>
+
+    <!-- =====================================================
+       STATS BAR
+       ===================================================== -->
+    <div class="stats-bar" aria-label="Server statistics">
+      <div class="container--wide">
+        <div class="stats-bar__grid">
+          <div class="stats-bar__item">
+            <span class="stats-bar__value" data-counter="4" data-suffix=""
+              >4</span
+            >
+            <span class="stats-bar__label">Active Civilisations</span>
+          </div>
+          <div class="stats-bar__item">
+            <span class="stats-bar__value" data-counter="200" data-suffix="³"
+              >200³</span
+            >
+            <span class="stats-bar__label">Max Airship Size (blocks)</span>
+          </div>
+          <div class="stats-bar__item">
+            <span class="stats-bar__value" data-counter="2" data-suffix=""
+              >2</span
+            >
+            <span class="stats-bar__label">PvP Hours / Weekend</span>
+          </div>
+          <div class="stats-bar__item">
+            <span class="stats-bar__value" data-counter="16">16+</span>
+            <span class="stats-bar__label">Age Requirement</span>
+          </div>
+          <div class="stats-bar__item">
+            <span class="stats-bar__value" data-counter="1" data-suffix=".21.1"
+              >1.21.1</span
+            >
+            <span class="stats-bar__label">Minecraft Version</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =====================================================
+       ABOUT SECTION
+       ===================================================== -->
+    <section class="section" id="about" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-text reveal">
+            <span class="section-eyebrow">About the Server</span>
+            <h2 id="about-heading">The Industrial Age Is Yours to Shape</h2>
+            <div class="brass-divider">
+              <span class="brass-divider-icon">⚙</span>
+            </div>
+            <p>
+              Gearforged World is a heavily modded Minecraft civilization server
+              running on
+              <strong>NeoForge 1.21.1</strong>. It blends the mechanical
+              complexity of <strong>Create mod</strong> with the physics-driven
+              engineering of <strong>Aeronautics</strong> — giving players the
+              tools to build working factories, functional airships, and war
+              machines unlike anything in vanilla Minecraft.
+            </p>
+            <p>
+              But technology is only the tool. The real game is
+              <strong>civilization building</strong>: claiming territory,
+              forging alliances through proximity-based diplomacy, declaring
+              raids, and fighting for dominance during weekly PvP windows.
+            </p>
+            <p>
+              Join or found a civilisation. Build in the open — bunkers and
+              underground bases are limited. Every structure you raise is a
+              statement of power, and every enemy can see it.
+            </p>
+            <div
+              style="
+                display: flex;
+                gap: var(--space-md);
+                flex-wrap: wrap;
+                margin-top: var(--space-lg);
+                align-items: center;
+              "
+            >
+              <a href="guide.html" class="btn btn--primary">Read the Guide</a>
+              <span class="pvp-badge">PvP: Sat–Sun 12:00–14:00 GMT</span>
+            </div>
+          </div>
+
+          <div class="about-visual reveal">
+            <!-- Logo placeholder — replaces with img if logo.png exists -->
+            <div
+              class="server-emblem"
+              role="img"
+              aria-label="Gearforged World emblem"
+            >
+              <div
+                class="server-emblem__ring server-emblem__ring--outer"
+                aria-hidden="true"
+              ></div>
+              <div
+                class="server-emblem__ring server-emblem__ring--inner"
+                aria-hidden="true"
+              ></div>
+              <div class="server-emblem__core">
+                <!-- Try to load logo.png; fallback to text emblem -->
+                <div class="logo-img-wrapper" id="logo-img-wrapper">
+                  <img
+                    src="assets/images/logo.png"
+                    alt="Gearforged World Logo"
+                    id="logo-img"
+                  />
+                </div>
+                <span class="server-emblem__icon" aria-hidden="true">⚙</span>
+                <span class="server-emblem__label">Gearforged</span>
+              </div>
+            </div>
+
+            <!-- Blueprint corner annotations -->
+            <div
+              class="blueprint-corner blueprint-corner--tl"
+              aria-hidden="true"
+            >
+              REF: GW-CORE-01<br />
+              SCALE: 1:1<br />
+              TOLERANCE: ±0.5
+            </div>
+            <div
+              class="blueprint-corner blueprint-corner--br"
+              aria-hidden="true"
+            >
+              VER: 1.21.1-NF<br />
+              AUTH: ADMIN<br />
+              DATE: 2025
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+       FEATURES GRID
+       ===================================================== -->
+    <section class="section section--dark" aria-labelledby="features-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-eyebrow">Core Features</span>
+          <h2 id="features-heading">Built for Industrial Warfare</h2>
+          <p style="margin: 0 auto">
+            Everything you need to build an empire, wage war, and forge history.
+          </p>
+        </div>
+
+        <div
+          class="features-grid"
+          id="features-grid"
+          aria-label="Server features"
+        >
+          <!-- Populated from server-data.json via JS below -->
+          <!-- Fallback static content for no-JS -->
+          <noscript>
+            <div class="feature-card">
+              <span class="feature-card__icon">🚁</span>
+              <h3 class="feature-card__title">Physics Airships</h3>
+              <p class="feature-card__desc">
+                Build and pilot functional airships up to 200³ blocks.
+              </p>
+            </div>
+          </noscript>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+       CIVILISATIONS PREVIEW
+       ===================================================== -->
+    <section class="section" aria-labelledby="civs-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-eyebrow">Active Civilisations</span>
+          <h2 id="civs-heading">Choose Your Allegiance</h2>
+          <p style="margin: 0 auto">
+            Four distinct powers vie for dominance. Join one — or found your
+            own.
+          </p>
+        </div>
+
+        <div
+          class="civs-preview"
+          id="civs-preview"
+          aria-label="Civilisation preview"
+        >
+          <!-- Populated via JS -->
+        </div>
+
+        <div
+          style="text-align: center; margin-top: var(--space-xl)"
+          class="reveal"
+        >
+          <a href="civs.html" class="btn btn--secondary"
+            >View All Civilisations →</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+       CTA BANNER
+       ===================================================== -->
+    <section class="section section--dark" aria-label="Call to action">
+      <div class="container reveal">
+        <div class="cta-banner">
+          <div class="cta-banner__gear" aria-hidden="true">⚙</div>
+          <span class="section-eyebrow">Ready to Forge Your Legacy?</span>
+          <h2>The Age of Industry Awaits</h2>
+          <p>
+            Grab your wrenches, load your cannons, and take to the skies. Read
+            the rules, pick a civilisation, and start building your mark on
+            Gearforged World.
+          </p>
+          <div class="cta-actions">
+            <a href="rules.html" class="btn btn--primary">📋 Read the Rules</a>
+            <a href="civs.html" class="btn btn--secondary"
+              >⚔ Join a Civilisation</a
+            >
+            <a href="guide.html" class="btn btn--secondary"
+              >📖 New Player Guide</a
+            >
+          </div>
+          <div style="margin-top: var(--space-xl)">
+            <div
+              class="hero__ip"
+              data-copy-ip="play.gearforged.world"
+              role="button"
+              tabindex="0"
+              style="margin: 0 auto; display: inline-flex"
+              aria-label="Click to copy server IP"
+            >
+              <span class="hero__ip-label">Server IP</span>
+              play.gearforged.world
+              <span style="opacity: 0.5; font-size: 0.75rem">⧉ Copy</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+       FOOTER
+       ===================================================== -->
+    <footer class="footer" role="contentinfo">
+      <div class="container">
+        <div class="footer__grid">
+          <div class="footer__brand">
+            <a
+              href="index.html"
+              class="footer__logo"
+              aria-label="Gearforged World Home"
+            >
+              <div class="footer__logo-emblem" aria-hidden="true">⚙</div>
+              <span class="footer__logo-text">Gearforged World</span>
+            </a>
+            <p>
+              A modded Minecraft civilization server built on gears, gunpowder,
+              and ambition.
+            </p>
+            <p
+              style="
+                font-family: var(--font-mono);
+                font-size: 0.75rem;
+                color: var(--brass-dark);
+              "
+            >
+              Minecraft 1.21.1 · NeoForge
+            </p>
+          </div>
+
+          <nav aria-label="Footer navigation">
+            <div class="footer__col-title">Navigate</div>
+            <ul class="footer__links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="civs.html">Civilisations</a></li>
+              <li><a href="rules.html">Rules</a></li>
+              <li><a href="guide.html">New Player Guide</a></li>
+            </ul>
+          </nav>
+
+          <div>
+            <div class="footer__col-title">Community</div>
+            <ul class="footer__links">
+              <li>
+                <a
+                  href="https://discord.gg/gearforged"
+                  target="_blank"
+                  rel="noopener"
+                  >Discord Server</a
+                >
+              </li>
+              <li><a href="rules.html#cat-discord">Community Rules</a></li>
+              <li><a href="rules.html#cat-war">War & PvP Rules</a></li>
+              <li><a href="guide.html#physics">Physics Entity Guide</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer__bottom">
+          <span class="footer__copyright">
+            © 2025 Aeronautics Civilization: Gearforged World · Not affiliated
+            with Mojang
+          </span>
+          <span class="footer__version">v1.21.1-NF</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts — theme MUST load first to prevent colour flash -->
+    <script src="js/theme.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      // =========================================================
+      // HOME-SPECIFIC: Load features + civ previews from JSON
+      // =========================================================
+      (async () => {
+        try {
+          const res = await fetch("data/server-data.json");
+          const data = await res.json();
+
+          // --- Features grid ---
+          const grid = document.getElementById("features-grid");
+          if (grid) {
+            grid.innerHTML = ""; // Clear fallback
+            data.features.forEach((feat, i) => {
+              const card = document.createElement("div");
+              card.className = "feature-card reveal";
+              card.style.transitionDelay = `${i * 0.08}s`;
+              card.innerHTML = `
+              <span class="feature-card__icon" aria-hidden="true">${feat.icon}</span>
+              <h3 class="feature-card__title">${feat.title}</h3>
+              <p class="feature-card__desc">${feat.description}</p>
+            `;
+              grid.appendChild(card);
+            });
+          }
+
+          // --- Civ previews ---
+          const preview = document.getElementById("civs-preview");
+          if (preview) {
+            data.civilizations.forEach((civ, i) => {
+              const tagsHtml = (civ.tags || [])
+                .slice(0, 3)
+                .map((t) => `<span class="tag">${t}</span>`)
+                .join("");
+              const card = document.createElement("a");
+              card.href = `civs.html#civ-${civ.id}`;
+              card.className = "civ-preview-card reveal";
+              card.style.transitionDelay = `${i * 0.1}s`;
+              card.style.textDecoration = "none";
+              card.innerHTML = `
+              <div class="civ-preview-card__glow" style="background:linear-gradient(90deg,${civ.accentColor},${civ.color})"></div>
+              <span class="civ-preview-card__emblem" aria-hidden="true">${civ.emblem}</span>
+              <div class="civ-preview-card__name">${civ.name}</div>
+              <div class="civ-preview-card__tagline">${civ.tagline}</div>
+              <div class="civ-preview-card__tags">${tagsHtml}</div>
+            `;
+              preview.appendChild(card);
+            });
+          }
+
+          // Re-run reveal observer for dynamically added elements
+          const newRevealEls = document.querySelectorAll(
+            ".reveal:not([data-observed])",
+          );
+          newRevealEls.forEach((el) => el.setAttribute("data-observed", "1"));
+          // Trigger IntersectionObserver manually
+          if (window.IntersectionObserver) {
+            const obs = new IntersectionObserver(
+              (entries) => {
+                entries.forEach((entry) => {
+                  if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    obs.unobserve(entry.target);
+                  }
+                });
+              },
+              { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
+            );
+            newRevealEls.forEach((el) => obs.observe(el));
+          }
+
+          // Check if logo.png exists
+          const logoImg = document.getElementById("logo-img");
+          const logoWrapper = document.getElementById("logo-img-wrapper");
+          const emblemIcon = document.querySelector(".server-emblem__icon");
+          const emblemLabel = document.querySelector(".server-emblem__label");
+          if (logoImg && logoWrapper) {
+            logoImg.addEventListener("load", () => {
+              logoWrapper.style.display = "block";
+              if (emblemIcon) emblemIcon.style.display = "none";
+              if (emblemLabel) emblemLabel.style.display = "none";
+            });
+            logoImg.addEventListener("error", () => {
+              logoWrapper.style.display = "none";
+            });
+          }
+        } catch (err) {
+          console.error("Failed to load homepage data:", err);
+        }
+      })();
+    </script>
+  </body>
+</html>

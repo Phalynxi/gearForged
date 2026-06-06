@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Gearforged World server rules — community conduct, claims, war, PvP, physics entities, and more."
+    />
+    <title>Rules — Gearforged World</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      /* Rules page extras */
+      .rules-search-bar {
+        display: flex;
+        gap: var(--space-sm);
+        align-items: center;
+        margin-bottom: var(--space-xl);
+      }
+
+      .rules-search-bar .rules-search {
+        flex: 1;
+        margin-bottom: 0;
+      }
+
+      .rules-controls {
+        display: flex;
+        gap: var(--space-sm);
+        flex-wrap: wrap;
+        align-items: center;
+        margin-bottom: var(--space-lg);
+      }
+
+      .rules-controls .btn {
+        font-size: 0.7rem;
+        padding: 0.4rem 0.9rem;
+      }
+
+      .rules-count {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        letter-spacing: 0.08em;
+        margin-left: auto;
+      }
+
+      .search-clear-btn {
+        position: absolute;
+        right: 0.9rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        cursor: pointer;
+        font-size: 1rem;
+        line-height: 1;
+        padding: 0.2rem;
+        transition: color var(--transition-fast);
+        display: none;
+      }
+
+      .search-clear-btn.visible {
+        display: block;
+      }
+      .search-clear-btn:hover {
+        color: var(--brass);
+      }
+
+      .rules-search__input {
+        padding-right: 2.5rem;
+      }
+
+      /* Last updated badge */
+      .last-updated {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-sm);
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        color: var(--text-muted);
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        padding: 0.3rem 0.8rem;
+        border-radius: var(--radius-sm);
+        margin-top: var(--space-md);
+      }
+
+      @media (max-width: 900px) {
+        .rules-controls {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .rules-count {
+          margin-left: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- =====================================================
+       NAVIGATION
+       ===================================================== -->
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+      <div class="container nav__inner">
+        <a
+          href="index.html"
+          class="nav__logo"
+          aria-label="Gearforged World Home"
+        >
+          <div class="nav__logo-emblem" aria-hidden="true">⚙</div>
+          <div class="nav__logo-text">
+            Gearforged
+            <span class="nav__logo-sub">Aeronautics Civ</span>
+          </div>
+        </a>
+        <ul class="nav__links" role="list">
+          <li><a href="index.html" class="nav__link">Home</a></li>
+          <li><a href="civs.html" class="nav__link">Civilisations</a></li>
+          <li><a href="rules.html" class="nav__link">Rules</a></li>
+          <li><a href="guide.html" class="nav__link">Guide</a></li>
+          <li>
+            <a href="index.html#about" class="nav__cta nav__link"
+              >Join Server</a
+            >
+          </li>
+        </ul>
+        <button
+          class="nav__hamburger"
+          aria-label="Toggle mobile menu"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="nav__mobile">
+      <ul
+        role="list"
+        style="
+          list-style: none;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        "
+      >
+        <li><a href="index.html" class="nav__link">Home</a></li>
+        <li><a href="civs.html" class="nav__link">Civilisations</a></li>
+        <li><a href="rules.html" class="nav__link active">Rules</a></li>
+        <li><a href="guide.html" class="nav__link">Guide</a></li>
+      </ul>
+    </div>
+
+    <!-- =====================================================
+       PAGE HEADER
+       ===================================================== -->
+    <div class="page-header">
+      <div class="container">
+        <span class="section-eyebrow">Server Documentation</span>
+        <h1>Server Rules</h1>
+        <p
+          style="
+            margin: var(--space-md) auto 0;
+            max-width: 55ch;
+            text-align: center;
+          "
+        >
+          Ignorance of the rules is never an excuse. Read them, know them,
+          follow them. Rules may be updated at any time — check back regularly.
+        </p>
+        <div
+          style="
+            display: flex;
+            justify-content: center;
+            margin-top: var(--space-md);
+          "
+        >
+          <span class="last-updated"
+            >📅 Last updated: 2025 · Rules subject to change</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- =====================================================
+       MAIN CONTENT
+       ===================================================== -->
+    <main>
+      <div class="container">
+        <div class="rules-layout">
+          <!-- ---- Sidebar TOC ---- -->
+          <aside aria-label="Rules table of contents">
+            <nav class="rules-toc" aria-label="Jump to section">
+              <div class="rules-toc__title">Table of Contents</div>
+              <ul class="rules-toc__list" id="toc-list" role="list">
+                <!-- Populated by rules.js -->
+              </ul>
+            </nav>
+
+            <!-- Quick note card -->
+            <div
+              class="card"
+              style="margin-top: var(--space-lg); padding: var(--space-lg)"
+            >
+              <div
+                style="
+                  font-family: var(--font-mono);
+                  font-size: 0.65rem;
+                  letter-spacing: 0.15em;
+                  text-transform: uppercase;
+                  color: var(--brass);
+                  margin-bottom: var(--space-sm);
+                "
+              >
+                Punishments
+              </div>
+              <p style="font-size: 0.85rem; max-width: none">
+                Intentional violations such as hacking or duping result in an
+                <strong>instant ban</strong>. Accidental violations may earn a
+                warning. Staff decisions are final.
+              </p>
+            </div>
+
+            <div
+              class="card"
+              style="margin-top: var(--space-md); padding: var(--space-lg)"
+            >
+              <div
+                style="
+                  font-family: var(--font-mono);
+                  font-size: 0.65rem;
+                  letter-spacing: 0.15em;
+                  text-transform: uppercase;
+                  color: var(--brass);
+                  margin-bottom: var(--space-sm);
+                "
+              >
+                Questions?
+              </div>
+              <p style="font-size: 0.85rem; max-width: none">
+                If a rule seems unclear, ask an admin or moderator
+                <em>before</em> acting. Better safe than banned.
+              </p>
+              <a
+                href="https://discord.gg/gearforged"
+                class="btn btn--secondary"
+                target="_blank"
+                rel="noopener"
+                style="
+                  font-size: 0.7rem;
+                  padding: 0.4rem 0.9rem;
+                  margin-top: var(--space-md);
+                  display: inline-block;
+                "
+              >
+                Ask on Discord
+              </a>
+            </div>
+          </aside>
+
+          <!-- ---- Rules main area ---- -->
+          <div>
+            <!-- Search -->
+            <div class="rules-search-bar">
+              <div
+                class="rules-search"
+                style="flex: 1; position: relative; margin-bottom: 0"
+              >
+                <span class="rules-search__icon" aria-hidden="true">🔍</span>
+                <input
+                  type="search"
+                  id="rules-search"
+                  class="rules-search__input"
+                  placeholder="Search rules…"
+                  aria-label="Search rules"
+                  autocomplete="off"
+                />
+                <button
+                  class="search-clear-btn"
+                  id="search-clear"
+                  aria-label="Clear search"
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="rules-controls">
+              <button class="btn btn--secondary" id="expand-all">
+                Expand All
+              </button>
+              <button class="btn btn--secondary" id="collapse-all">
+                Collapse All
+              </button>
+              <span
+                class="rules-count"
+                id="rules-count"
+                aria-live="polite"
+              ></span>
+            </div>
+
+            <!-- Rules container — populated by rules.js -->
+            <div id="rules-container" aria-label="Server rules" role="region">
+              <!-- Loading state -->
+              <div
+                id="rules-loading"
+                style="
+                  text-align: center;
+                  padding: 3rem;
+                  color: var(--text-muted);
+                  font-family: var(--font-mono);
+                "
+              >
+                <span class="gear-spinner" aria-hidden="true">⚙</span>
+                <p style="margin-top: 1rem">Loading rules…</p>
+              </div>
+            </div>
+
+            <!-- No results -->
+            <div
+              class="rules-no-results"
+              id="rules-no-results"
+              role="status"
+              aria-live="polite"
+            >
+              <p style="font-size: 2rem; margin-bottom: 1rem">⚙</p>
+              No rules matching your search.
+              <br /><span style="font-size: 0.8rem; opacity: 0.6"
+                >Try a different keyword.</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- =====================================================
+       FOOTER
+       ===================================================== -->
+    <footer class="footer" role="contentinfo">
+      <div class="container">
+        <div class="footer__grid">
+          <div class="footer__brand">
+            <a href="index.html" class="footer__logo">
+              <div class="footer__logo-emblem" aria-hidden="true">⚙</div>
+              <span class="footer__logo-text">Gearforged World</span>
+            </a>
+            <p>
+              Aeronautics Civilization: Gearforged World. Minecraft 1.21.1 ·
+              NeoForge.
+            </p>
+          </div>
+          <nav aria-label="Footer navigation">
+            <div class="footer__col-title">Navigate</div>
+            <ul class="footer__links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="civs.html">Civilisations</a></li>
+              <li><a href="rules.html">Rules</a></li>
+              <li><a href="guide.html">Guide</a></li>
+            </ul>
+          </nav>
+          <div>
+            <div class="footer__col-title">Community</div>
+            <ul class="footer__links">
+              <li>
+                <a
+                  href="https://discord.gg/gearforged"
+                  target="_blank"
+                  rel="noopener"
+                  >Discord</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <span class="footer__copyright"
+            >© 2025 Aeronautics Civilization: Gearforged World · Not affiliated
+            with Mojang</span
+          >
+          <span class="footer__version">v1.21.1-NF</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/theme.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/rules.js"></script>
+    <script>
+      // Show/hide search clear button, update count
+      document.addEventListener("DOMContentLoaded", () => {
+        const searchInput = document.getElementById("rules-search");
+        const clearBtn = document.getElementById("search-clear");
+
+        if (searchInput && clearBtn) {
+          searchInput.addEventListener("input", () => {
+            clearBtn.classList.toggle("visible", searchInput.value.length > 0);
+          });
+        }
+      });
+
+      // Update rule count after data loads
+      document.addEventListener("DOMContentLoaded", () => {
+        // Observer: once rules-container has children, update count
+        const container = document.getElementById("rules-container");
+        const countEl = document.getElementById("rules-count");
+        const loading = document.getElementById("rules-loading");
+
+        const updateCount = () => {
+          if (!countEl) return;
+          const visible = container.querySelectorAll(
+            '.rule-item:not([style*="display: none"])',
+          ).length;
+          const total = container.querySelectorAll(".rule-item").length;
+          if (total > 0) {
+            countEl.textContent =
+              visible === total
+                ? `${total} rules total`
+                : `${visible} of ${total} rules`;
+            if (loading) loading.remove();
+          }
+        };
+
+        const observer = new MutationObserver(updateCount);
+        if (container)
+          observer.observe(container, { childList: true, subtree: true });
+
+        document
+          .getElementById("rules-search")
+          ?.addEventListener("input", () => {
+            setTimeout(updateCount, 250);
+          });
+      });
+    </script>
+  </body>
+</html>

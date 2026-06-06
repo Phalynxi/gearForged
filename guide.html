@@ -1,0 +1,1222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="New player guide for Gearforged World — civilisations, claims, diplomacy, wars, airships, factories, and progression."
+    />
+    <title>Guide — Gearforged World</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      /* Guide page extras */
+      .guide-progress-bar {
+        position: fixed;
+        top: var(--nav-height);
+        left: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--brass-dark), var(--brass));
+        width: 0%;
+        z-index: 999;
+        transition: width 0.1s linear;
+        box-shadow: 0 0 8px var(--accent-glow);
+      }
+
+      .guide-step-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: var(--space-lg);
+        margin: var(--space-lg) 0;
+      }
+
+      .guide-step-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        padding: var(--space-lg);
+        text-align: center;
+        position: relative;
+      }
+
+      .guide-step-card__num {
+        font-family: var(--font-heading);
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: var(--border);
+        line-height: 1;
+        margin-bottom: var(--space-sm);
+      }
+
+      .guide-step-card__title {
+        font-family: var(--font-heading);
+        font-size: 0.9rem;
+        color: var(--text-primary);
+        letter-spacing: 0.05em;
+        margin-bottom: var(--space-xs);
+      }
+
+      .guide-step-card__desc {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+      }
+
+      /* Comparison table */
+      .compare-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: var(--space-lg) 0;
+        font-size: 0.9rem;
+      }
+
+      .compare-table th {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--brass);
+        background: var(--bg-card);
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--border);
+        text-align: left;
+      }
+
+      .compare-table td {
+        padding: 0.65rem 1rem;
+        border: 1px solid var(--border);
+        color: var(--text-secondary);
+        background: var(--bg-secondary);
+      }
+
+      .compare-table tr:hover td {
+        background: var(--bg-card);
+      }
+
+      .tick {
+        color: #4daa7a;
+        font-weight: bold;
+      }
+      .cross {
+        color: var(--rust);
+        font-weight: bold;
+      }
+      .warn {
+        color: #e07b39;
+        font-weight: bold;
+      }
+
+      /* Timeline */
+      .timeline {
+        position: relative;
+        padding-left: 2rem;
+        margin: var(--space-lg) 0;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(180deg, var(--brass), var(--border));
+      }
+
+      .timeline-item {
+        position: relative;
+        margin-bottom: var(--space-lg);
+      }
+
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -2.43rem;
+        top: 0.4rem;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--brass);
+        border: 2px solid var(--bg-primary);
+        box-shadow: 0 0 8px var(--accent-glow);
+      }
+
+      .timeline-item__label {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        color: var(--brass);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.2rem;
+      }
+
+      .timeline-item__title {
+        font-family: var(--font-heading);
+        font-size: 1rem;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+      }
+
+      .timeline-item__desc {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Reading progress bar -->
+    <div
+      class="guide-progress-bar"
+      id="reading-progress"
+      aria-hidden="true"
+    ></div>
+
+    <!-- =====================================================
+       NAVIGATION
+       ===================================================== -->
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+      <div class="container nav__inner">
+        <a
+          href="index.html"
+          class="nav__logo"
+          aria-label="Gearforged World Home"
+        >
+          <div class="nav__logo-emblem" aria-hidden="true">⚙</div>
+          <div class="nav__logo-text">
+            Gearforged
+            <span class="nav__logo-sub">Aeronautics Civ</span>
+          </div>
+        </a>
+        <ul class="nav__links" role="list">
+          <li><a href="index.html" class="nav__link">Home</a></li>
+          <li><a href="civs.html" class="nav__link">Civilisations</a></li>
+          <li><a href="rules.html" class="nav__link">Rules</a></li>
+          <li><a href="guide.html" class="nav__link">Guide</a></li>
+          <li>
+            <a
+              href="index.html"
+              class="nav__cta nav__link"
+              data-copy-ip="play.gearforged.world"
+              >Join Server</a
+            >
+          </li>
+        </ul>
+        <button
+          class="nav__hamburger"
+          aria-label="Toggle mobile menu"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="nav__mobile">
+      <ul
+        role="list"
+        style="
+          list-style: none;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        "
+      >
+        <li><a href="index.html" class="nav__link">Home</a></li>
+        <li><a href="civs.html" class="nav__link">Civilisations</a></li>
+        <li><a href="rules.html" class="nav__link">Rules</a></li>
+        <li><a href="guide.html" class="nav__link active">Guide</a></li>
+      </ul>
+    </div>
+
+    <!-- =====================================================
+       PAGE HEADER
+       ===================================================== -->
+    <div class="page-header">
+      <div class="container">
+        <span class="section-eyebrow">Documentation</span>
+        <h1>New Player Guide</h1>
+        <p
+          style="
+            margin: var(--space-md) auto 0;
+            max-width: 55ch;
+            text-align: center;
+          "
+        >
+          Everything you need to go from fresh spawn to founding an empire. Read
+          this before you place your first block.
+        </p>
+      </div>
+    </div>
+
+    <!-- =====================================================
+       MAIN CONTENT
+       ===================================================== -->
+    <main>
+      <div class="container">
+        <div class="guide-layout">
+          <!-- ---- Sidebar nav ---- -->
+          <aside>
+            <nav class="guide-nav" aria-label="Guide sections">
+              <div class="guide-nav__title">Sections</div>
+              <ul class="guide-nav__list" id="guide-nav-list" role="list">
+                <li class="guide-nav__item">
+                  <a href="#getting-started">Getting Started</a>
+                </li>
+                <li class="guide-nav__item">
+                  <a href="#civs">Civilisations</a>
+                </li>
+                <li class="guide-nav__item">
+                  <a href="#claims">Territory & Claims</a>
+                </li>
+                <li class="guide-nav__item">
+                  <a href="#diplomacy">Diplomacy</a>
+                </li>
+                <li class="guide-nav__item">
+                  <a href="#building">Building Standards</a>
+                </li>
+                <li class="guide-nav__item">
+                  <a href="#physics">Physics Entities</a>
+                </li>
+                <li class="guide-nav__item">
+                  <a href="#industry">Industry & Create</a>
+                </li>
+                <li class="guide-nav__item"><a href="#war">War & PvP</a></li>
+                <li class="guide-nav__item">
+                  <a href="#weapons">Weapons & Artillery</a>
+                </li>
+                <li class="guide-nav__item">
+                  <a href="#progression">Progression Path</a>
+                </li>
+                <li class="guide-nav__item">
+                  <a href="#tips">Tips & Tricks</a>
+                </li>
+              </ul>
+            </nav>
+          </aside>
+
+          <!-- ---- Guide content ---- -->
+          <article>
+            <!-- Getting Started -->
+            <section class="guide-section" id="getting-started">
+              <h2>🚀 Getting Started</h2>
+              <p>
+                Welcome to Gearforged World — a modded Minecraft civilization
+                server running on
+                <strong>NeoForge 1.21.1</strong>. This isn't a survival or
+                creative server. It's a geopolitical sandbox where the goal is
+                to build a nation, grow it through industry and diplomacy, and
+                defend it (or expand it) through structured warfare.
+              </p>
+
+              <div class="guide-step-grid">
+                <div class="guide-step-card">
+                  <div class="guide-step-card__num">01</div>
+                  <div class="guide-step-card__title">Read the Rules</div>
+                  <div class="guide-step-card__desc">
+                    All of them. Ignorance is not a defence.
+                  </div>
+                </div>
+                <div class="guide-step-card">
+                  <div class="guide-step-card__num">02</div>
+                  <div class="guide-step-card__title">Join Discord</div>
+                  <div class="guide-step-card__desc">
+                    Required for diplomacy and server announcements.
+                  </div>
+                </div>
+                <div class="guide-step-card">
+                  <div class="guide-step-card__num">03</div>
+                  <div class="guide-step-card__title">Pick a Civilisation</div>
+                  <div class="guide-step-card__desc">
+                    Or gather allies to found your own.
+                  </div>
+                </div>
+                <div class="guide-step-card">
+                  <div class="guide-step-card__num">04</div>
+                  <div class="guide-step-card__title">Build & Claim</div>
+                  <div class="guide-step-card__desc">
+                    Build first, then claim. Not the other way around.
+                  </div>
+                </div>
+              </div>
+
+              <div class="info-box">
+                <div class="info-box__title">New Player Protection</div>
+                <p>
+                  For your first <strong>week</strong> on the server and until
+                  you have <strong>diamond armour</strong>, other players cannot
+                  kill you — unless you initiate combat first. Use this time
+                  wisely.
+                </p>
+              </div>
+
+              <h3>Required Mods</h3>
+              <p>
+                You need a NeoForge 1.21.1 modpack to connect. Ask in Discord
+                for the current modpack link or CurseForge pack ID. Do not try
+                to connect with vanilla or other mod loaders.
+              </p>
+            </section>
+
+            <div class="brass-divider">
+              <span class="brass-divider-icon">⚙</span>
+            </div>
+
+            <!-- Civilisations -->
+            <section class="guide-section" id="civs">
+              <h2>🏛 Civilisations</h2>
+              <p>
+                A civilisation is a player-run nation with its own territory,
+                government, economy, and military. Every player should belong to
+                one — or be in the process of founding one.
+              </p>
+
+              <h3>Joining an Existing Civilisation</h3>
+              <p>
+                Check the <a href="civs.html">Civilisations page</a> for current
+                factions and their Discord links. Contact their leadership and
+                follow their admission process. Each civ has the right to accept
+                or reject any applicant for any reason.
+              </p>
+
+              <h3>Founding Your Own</h3>
+              <p>
+                You need at minimum: a location, a build, and claimed land.
+                Then:
+              </p>
+              <ul>
+                <li>
+                  Build something substantial before claiming — no pre-claiming.
+                </li>
+                <li>
+                  Name your civilisation and establish a government structure.
+                </li>
+                <li>
+                  Post a declaration in <code>#civpolitics</code> on Discord.
+                </li>
+                <li>
+                  Civilisations cannot resemble hate groups or declare
+                  themselves fascist.
+                </li>
+                <li>
+                  You may use any internal governance structure you choose.
+                </li>
+              </ul>
+
+              <div class="info-box info-box--warning">
+                <div class="info-box__title">⚠ Leadership Note</div>
+                <p>
+                  Civilisations have full autonomy over membership and internal
+                  rules — but all players must still follow the server-wide
+                  rules at all times.
+                </p>
+              </div>
+
+              <h3>Civilisation Rights</h3>
+              <ul>
+                <li>Exclude anyone from membership for any reason.</li>
+                <li>
+                  Use any leadership structure (monarchy, democracy, autocracy,
+                  etc.).
+                </li>
+                <li>
+                  Declare war on other civilisations (subject to war rules).
+                </li>
+                <li>Build diplomatic relationships and trade agreements.</li>
+                <li>Claim territory proportional to your builds.</li>
+              </ul>
+            </section>
+
+            <div class="brass-divider">
+              <span class="brass-divider-icon">⚙</span>
+            </div>
+
+            <!-- Claims -->
+            <section class="guide-section" id="claims">
+              <h2>🗺 Territory & Claims</h2>
+              <p>
+                Territory is power. Claims define where you're protected — and
+                where you're not. Getting this right from the start prevents
+                costly disputes.
+              </p>
+
+              <h3>The Golden Rule</h3>
+              <p>
+                <strong>Build first, claim second.</strong> You may only claim
+                chunks you have actually built in, plus a
+                <strong>2-chunk buffer radius</strong> around those builds. No
+                reserving land for future plans.
+              </p>
+
+              <h3>Claim Restrictions</h3>
+              <ul>
+                <li>
+                  Do not claim within <strong>5 chunks</strong> of another
+                  player's claim.
+                </li>
+                <li>
+                  No "snake claiming" — long thin corridors of claimed land to
+                  connect builds.
+                </li>
+                <li>
+                  No low-effort builds (dirt huts, single blocks) used purely to
+                  claim land.
+                </li>
+                <li>
+                  Do not claim land with intent to block another player's
+                  expansion.
+                </li>
+                <li>No pre-claiming areas for future projects.</li>
+              </ul>
+
+              <div class="info-box info-box--danger">
+                <div class="info-box__title">🚫 Underground Bases</div>
+                <p>
+                  Underground bases are <strong>prohibited</strong>. Bunkers are
+                  permitted only up to
+                  <strong>40 blocks below the surface</strong>, must be within
+                  your claims, beneath an existing above-ground base, and have a
+                  usable entrance.
+                </p>
+              </div>
+
+              <h3>Chunk Loading</h3>
+              <p>
+                The chunk loading feature only works while at least one
+                civilisation member is online. Plan your infrastructure
+                accordingly — offline farms stop running.
+              </p>
+            </section>
+
+            <div class="brass-divider">
+              <span class="brass-divider-icon">⚙</span>
+            </div>
+
+            <!-- Diplomacy -->
+            <section class="guide-section" id="diplomacy">
+              <h2>🤝 Diplomacy</h2>
+              <p>
+                All formal diplomacy must happen in the right place. This isn't
+                just convention — it's a rule.
+              </p>
+
+              <h3>Where to Negotiate</h3>
+              <ul>
+                <li>
+                  <strong>In-game agreements</strong> — must happen within
+                  proximity voice/text chat range.
+                </li>
+                <li>
+                  <strong>Formal treaties, trade deals, declarations</strong> —
+                  must be posted in <code>#civpolitics</code> on Discord.
+                </li>
+                <li><strong>Casual conversation</strong> — anywhere.</li>
+              </ul>
+
+              <div class="info-box">
+                <div class="info-box__title">📌 Why This Matters</div>
+                <p>
+                  Off-channel negotiations have no standing. If it didn't happen
+                  in <code>#civpolitics</code>, it didn't happen officially.
+                  Screenshot everything.
+                </p>
+              </div>
+
+              <h3>Common Diplomatic Actions</h3>
+              <table
+                class="compare-table"
+                aria-label="Diplomatic actions and where to conduct them"
+              >
+                <thead>
+                  <tr>
+                    <th>Action</th>
+                    <th>Channel</th>
+                    <th>Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Trade agreement</td>
+                    <td><code>#civpolitics</code></td>
+                    <td>Both parties must confirm</td>
+                  </tr>
+                  <tr>
+                    <td>Alliance declaration</td>
+                    <td><code>#civpolitics</code></td>
+                    <td>Signed by both civ leaders</td>
+                  </tr>
+                  <tr>
+                    <td>Raid declaration</td>
+                    <td><code>#civpolitics</code></td>
+                    <td>Minimum 24h notice required</td>
+                  </tr>
+                  <tr>
+                    <td>Total War vote</td>
+                    <td><code>#civpolitics</code></td>
+                    <td>Both civs must vote yes</td>
+                  </tr>
+                  <tr>
+                    <td>Peace treaty</td>
+                    <td><code>#civpolitics</code></td>
+                    <td>Required to end Total War</td>
+                  </tr>
+                  <tr>
+                    <td>In-game negotiation</td>
+                    <td>Proximity chat (in-game)</td>
+                    <td>Must be within voice/text range</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+
+            <div class="brass-divider">
+              <span class="brass-divider-icon">⚙</span>
+            </div>
+
+            <!-- Building Standards -->
+            <section class="guide-section" id="building">
+              <h2>🏗 Building Standards</h2>
+              <p>
+                Gearforged World has real building standards. Functionality
+                isn't enough — your builds must look like part of a
+                civilisation, not a test world.
+              </p>
+
+              <h3>The Core Requirements</h3>
+              <ul>
+                <li>
+                  Complete the surrounding structure <em>before</em> building
+                  the farm or contraption inside it.
+                </li>
+                <li>
+                  All structures must have walls and a roof (unless outdoors is
+                  justified — e.g. tree farms).
+                </li>
+                <li>
+                  Builds must have genuine decorative effort: details, texture,
+                  purpose.
+                </li>
+                <li>
+                  Blank walls and flat roofs alone are
+                  <strong>not acceptable</strong>.
+                </li>
+                <li>
+                  All Create contraptions and workshops must be incorporated
+                  into proper builds.
+                </li>
+              </ul>
+
+              <div class="info-box info-box--warning">
+                <div class="info-box__title">⚠ No Loopholes</div>
+                <p>
+                  Attempts to argue "technically this isn't a farm" or
+                  "technically my machine needs to be outside" will not be
+                  accepted. If you're unsure, ask an admin before building — not
+                  after.
+                </p>
+              </div>
+
+              <h3>Landscape Rules</h3>
+              <ul>
+                <li>Do not ruin the natural landscape unnecessarily.</li>
+                <li>No lava casts.</li>
+                <li>No massive unfilled holes left in the world.</li>
+                <li>
+                  Terraforming is allowed as part of legitimate build projects.
+                </li>
+              </ul>
+
+              <h3>Resource Denial</h3>
+              <p>
+                Don't build on the border of another player's claim specifically
+                to deny them resources. Don't mine out all nearby ore deposits
+                to disadvantage rivals. This is a bannable offence if
+                intentional. Exception: temporary assault structures during PvP
+                Time.
+              </p>
+            </section>
+
+            <div class="brass-divider">
+              <span class="brass-divider-icon">⚙</span>
+            </div>
+
+            <!-- Physics Entities -->
+            <section class="guide-section" id="physics">
+              <h2>🚁 Physics Entities (Aeronautics)</h2>
+              <p>
+                Physics entities are structures assembled in the world and then
+                made dynamic using the
+                <strong>Aeronautics</strong> mod — turning them into functional
+                airships, warships, submarines, and ground vehicles. They are
+                one of the most powerful (and expensive) tools in the game.
+              </p>
+
+              <h3>Size & Quantity Limits</h3>
+              <ul>
+                <li>Maximum size: <strong>200 × 200 × 200 blocks</strong>.</li>
+                <li>
+                  Maximum quantity:
+                  <strong>3 physics entities per player</strong>.
+                </li>
+                <li>Both limits are subject to change by admin decision.</li>
+              </ul>
+
+              <h3>Ownership Rules</h3>
+              <ul>
+                <li>
+                  Do not destroy an unoccupied physics entity inside claimed
+                  land.
+                </li>
+                <li>Do not steal another player's vehicle for personal use.</li>
+                <li>
+                  During battle, if a physics entity is destroyed,
+                  <strong>salvaging scraps is permitted</strong>.
+                </li>
+              </ul>
+
+              <h3>Boarding</h3>
+              <ul>
+                <li>
+                  You may only board another player's vehicle without consent if
+                  it is <strong>immobilised</strong>.
+                </li>
+                <li>
+                  "Immobilised" means it cannot move without repairs — simply
+                  being parked does not count.
+                </li>
+              </ul>
+
+              <h3>Abandoned Vehicles</h3>
+              <ul>
+                <li>If abandoned within claimed land: salvage it.</li>
+                <li>
+                  If abandoned in the wilderness with no claimed owner: notify
+                  an admin to remove the physics properties.
+                </li>
+              </ul>
+
+              <div class="info-box info-box--warning">
+                <div class="info-box__title">⚠ Performance Warning</div>
+                <p>
+                  Flying too fast into unloaded chunks can cause momentum loss,
+                  vehicle disappearance, crashes, or falling from the sky. Use
+                  <strong>Chunky</strong> for client-side pre-generation. All
+                  world-border chunks are pre-generated server-side.
+                </p>
+              </div>
+
+              <h3>Recommended Settings While Piloting</h3>
+              <ul>
+                <li>Render Distance: <strong>20</strong></li>
+                <li>
+                  Simulation Distance: <strong>20</strong> (minimum 10 for
+                  slower travel)
+                </li>
+                <li>Disable shaders while constructing physics entities.</li>
+                <li>
+                  Players on integrated graphics should avoid physics entity
+                  combat.
+                </li>
+              </ul>
+
+              <div class="info-box info-box--danger">
+                <div class="info-box__title">🚫 World Border</div>
+                <p>
+                  Physics entities can bypass the world border. Doing so will
+                  destroy both the vehicle and likely the pilot. Don't go near
+                  it.
+                </p>
+              </div>
+            </section>
+
+            <div class="brass-divider">
+              <span class="brass-divider-icon">⚙</span>
+            </div>
+
+            <!-- Industry -->
+            <section class="guide-section" id="industry">
+              <h2>⚙ Industry & Create Mod</h2>
+              <p>
+                The <strong>Create mod</strong> is the backbone of Gearforged
+                World's economy. Mechanical contraptions, automated assembly
+                lines, and factory complexes power every civilisation's output.
+              </p>
+
+              <h3>Lag Prevention Rules</h3>
+              <ul>
+                <li>No lag machines of any kind.</li>
+                <li>
+                  No extremely efficient farms that noticeably impact server
+                  TPS. Spark profiling can be used to identify offenders.
+                </li>
+                <li>
+                  Spread farms across multiple cities rather than concentrating
+                  everything in one mega-build.
+                </li>
+                <li>One <strong>Power Loader</strong> per player maximum.</li>
+              </ul>
+
+              <h3>Integrating Farms into Builds</h3>
+              <p>
+                Every farm, Create contraption, and workshop must be integrated
+                into a proper build. The structure around it must be
+                <em>completed first</em>. A working windmill in the middle of a
+                dirt field is not acceptable — house it in a proper mill
+                building.
+              </p>
+
+              <h3>What You Can Build</h3>
+              <ul>
+                <li>
+                  Automated resource farms (ore processing, crop farming,
+                  smelting)
+                </li>
+                <li>
+                  Create mechanical assembly lines for weapons and components
+                </li>
+                <li>
+                  Power networks using water wheels, windmills, or steam engines
+                </li>
+                <li>Transport networks (Create trains, cart systems)</li>
+                <li>Cannons, autocannon components, and CBC shells</li>
+              </ul>
+
+              <div class="info-box">
+                <div class="info-box__title">💡 Pro Tip</div>
+                <p>
+                  Build your factory shell first, then design the contraptions
+                  to fit the space. It's much easier to plan this way and avoids
+                  building standards violations.
+                </p>
+              </div>
+            </section>
+
+            <div class="brass-divider">
+              <span class="brass-divider-icon">⚙</span>
+            </div>
+
+            <!-- War & PvP -->
+            <section class="guide-section" id="war">
+              <h2>⚔ War & PvP</h2>
+              <p>
+                Combat is structured, not chaotic. There are specific windows
+                for base raids, and specific rules for what you can and can't
+                destroy. Understand the difference before you open fire.
+              </p>
+
+              <h3>PvP Time</h3>
+              <p>
+                Standard PvP Time is
+                <strong>Saturdays and Sundays, 12:00–14:00 GMT</strong>. During
+                these windows:
+              </p>
+              <ul>
+                <li>Players may enter enemy bases.</li>
+                <li>Base protection is disabled.</li>
+                <li>Raids may occur (if declared 24h in advance).</li>
+              </ul>
+              <p>
+                Outside PvP Time, entering another player's claimed land is
+                prohibited.
+              </p>
+
+              <h3>Raid Declarations</h3>
+              <ul>
+                <li>
+                  Must be posted in <code>#civpolitics</code> at least
+                  <strong>24 hours</strong> before the raid.
+                </li>
+                <li>Defenders must have time to organise a defence.</li>
+                <li>
+                  Each civilisation may declare only
+                  <strong>one base raid per PvP Time</strong>.
+                </li>
+                <li>
+                  If the target has multiple bases, specify which one you're
+                  raiding.
+                </li>
+              </ul>
+
+              <h3>Griefing Rules</h3>
+              <table
+                class="compare-table"
+                aria-label="What griefing is and isn't allowed"
+              >
+                <thead>
+                  <tr>
+                    <th>Action</th>
+                    <th>Permitted?</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Destroying economy infrastructure (farms, machines)</td>
+                    <td><span class="tick">✓ Yes</span></td>
+                  </tr>
+                  <tr>
+                    <td>Damaging or destroying physics entities in combat</td>
+                    <td><span class="tick">✓ Yes</span></td>
+                  </tr>
+                  <tr>
+                    <td>Levelling entire bases</td>
+                    <td><span class="cross">✗ No</span></td>
+                  </tr>
+                  <tr>
+                    <td>Excessive destruction of aesthetic builds</td>
+                    <td><span class="cross">✗ No</span></td>
+                  </tr>
+                  <tr>
+                    <td>Mining through bases manually</td>
+                    <td><span class="cross">✗ No</span></td>
+                  </tr>
+                  <tr>
+                    <td>Breaking farms by hand</td>
+                    <td><span class="cross">✗ No</span></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <h3>Total War</h3>
+              <p>
+                If two or more civilisations vote to enable Total War, all
+                normal PvP restrictions between those nations are lifted:
+              </p>
+              <ul>
+                <li>
+                  PvP Time becomes <strong>24/7</strong> between participants.
+                </li>
+                <li>No raid declaration is needed.</li>
+                <li>Levelling cities and aesthetic builds is permitted.</li>
+                <li>Neutral civilisations remain protected.</li>
+                <li>
+                  Total War can only end via a
+                  <strong>peace treaty</strong> posted in
+                  <code>#civpolitics</code>.
+                </li>
+              </ul>
+
+              <h3>PvP Ground Rules (Always)</h3>
+              <ul>
+                <li><span class="cross">✗</span> No combat logging.</li>
+                <li><span class="cross">✗</span> No Crystal PvP.</li>
+                <li><span class="cross">✗</span> No spawn camping.</li>
+                <li>
+                  <span class="tick">✓</span> Players retreating into their base
+                  become protected.
+                </li>
+                <li>
+                  Infrastructure outside bases (railways, transport ships) may
+                  be attacked <strong>at any time</strong>.
+                </li>
+              </ul>
+            </section>
+
+            <div class="brass-divider">
+              <span class="brass-divider-icon">⚙</span>
+            </div>
+
+            <!-- Weapons -->
+            <section class="guide-section" id="weapons">
+              <h2>💣 Weapons & Artillery</h2>
+              <p>
+                Modded weaponry is a core part of conflict on Gearforged.
+                Understand the rules before you build or deploy anything that
+                goes bang.
+              </p>
+
+              <h3>Approved Destruction Methods</h3>
+              <ul>
+                <li>
+                  <strong>Modded explosives</strong> — from the server's
+                  modpack.
+                </li>
+                <li>
+                  <strong>Autocannons</strong> — automated rotary artillery.
+                </li>
+                <li>
+                  TNT used as <strong>trigger mechanisms</strong> for bombs
+                  using CBC shell payloads.
+                </li>
+              </ul>
+
+              <h3>TNT Restrictions</h3>
+              <ul>
+                <li>Maximum <strong>5 TNT</strong> per operation.</li>
+                <li>Maximum <strong>2 TNT Minecarts</strong>.</li>
+                <li>
+                  Raw TNT placement for mass destruction is not the intended use
+                  — build CBC payloads instead.
+                </li>
+              </ul>
+
+              <h3>Nuclear Weapons</h3>
+              <ul>
+                <li>
+                  Nuclear weapons
+                  <strong>cannot be used on claimed chunks</strong> outside of
+                  Total War.
+                </li>
+                <li>
+                  During Total War, nuclear use against participating nations is
+                  permitted.
+                </li>
+              </ul>
+
+              <h3>Weapon Testing</h3>
+              <ul>
+                <li>
+                  Do not test weapons within <strong>8 chunks</strong> of
+                  another player's claim.
+                </li>
+                <li>Find a remote wilderness area — the world is large.</li>
+              </ul>
+
+              <h3>CBC & Autocannon Maintenance</h3>
+              <div class="info-box info-box--warning">
+                <div class="info-box__title">⚠ Always Use Silk Touch</div>
+                <p>
+                  Breaking CBC cannons or autocannons without
+                  <strong>Silk Touch</strong> destroys significant resources.
+                  Never attempt to break Levitate blocks. This cannot be
+                  recovered — it's just gone.
+                </p>
+              </div>
+            </section>
+
+            <div class="brass-divider">
+              <span class="brass-divider-icon">⚙</span>
+            </div>
+
+            <!-- Progression -->
+            <section class="guide-section" id="progression">
+              <h2>📈 Progression Path</h2>
+              <p>
+                A rough roadmap from new player to established civilisation
+                leader.
+              </p>
+
+              <div class="timeline" role="list">
+                <div class="timeline-item" role="listitem">
+                  <div class="timeline-item__label">Week 1</div>
+                  <div class="timeline-item__title">Establish Yourself</div>
+                  <div class="timeline-item__desc">
+                    Join a civilisation (or scout locations to found one).
+                    Gather basic resources. Build your first proper structure.
+                    Don't die — new player protection lasts one week.
+                  </div>
+                </div>
+                <div class="timeline-item" role="listitem">
+                  <div class="timeline-item__label">Week 2–3</div>
+                  <div class="timeline-item__title">Claim Territory</div>
+                  <div class="timeline-item__desc">
+                    Build substantially, then claim. Establish a recognisable
+                    base. Begin automating resource collection with Create.
+                    Stake your civilisation's position in
+                    <code>#civpolitics</code>.
+                  </div>
+                </div>
+                <div class="timeline-item" role="listitem">
+                  <div class="timeline-item__label">Month 1</div>
+                  <div class="timeline-item__title">Build Industry</div>
+                  <div class="timeline-item__desc">
+                    Set up automated farms and Create assembly lines inside
+                    proper buildings. Establish a production surplus. Begin
+                    resource trading with allied civilisations.
+                  </div>
+                </div>
+                <div class="timeline-item" role="listitem">
+                  <div class="timeline-item__label">Month 2</div>
+                  <div class="timeline-item__title">Military Capability</div>
+                  <div class="timeline-item__desc">
+                    Construct your first physics entity — a scout airship or
+                    ground vehicle. Build CBC cannons and autocannon
+                    emplacements. Participate in your first PvP Time event.
+                  </div>
+                </div>
+                <div class="timeline-item" role="listitem">
+                  <div class="timeline-item__label">Ongoing</div>
+                  <div class="timeline-item__title">Geopolitical Play</div>
+                  <div class="timeline-item__desc">
+                    Forge alliances, declare raids, negotiate treaties, and
+                    expand territory. Build your civilisation's legacy in the
+                    world's political history.
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <div class="brass-divider">
+              <span class="brass-divider-icon">⚙</span>
+            </div>
+
+            <!-- Tips -->
+            <section class="guide-section" id="tips">
+              <h2>💡 Tips & Tricks</h2>
+
+              <h3>Performance</h3>
+              <ul>
+                <li>
+                  Flying at high altitude improves FPS and reduces server
+                  strain.
+                </li>
+                <li>
+                  Do not maximise Minecraft until it has fully loaded — causes
+                  crashes.
+                </li>
+                <li>
+                  Disable shaders when building physics entities; re-enable once
+                  finished.
+                </li>
+                <li>
+                  Use Chunky to pre-generate chunks in areas you plan to fly
+                  through.
+                </li>
+              </ul>
+
+              <h3>Politics</h3>
+              <ul>
+                <li>
+                  Screenshot every agreement in <code>#civpolitics</code>.
+                  Disputes without evidence go against you.
+                </li>
+                <li>
+                  Even if you dislike a civilisation, keep things civil in
+                  public channels.
+                </li>
+                <li>Neutrality is a valid strategy, especially early on.</li>
+              </ul>
+
+              <h3>Building</h3>
+              <ul>
+                <li>
+                  Plan your factory layout before building the shell — it's much
+                  easier.
+                </li>
+                <li>
+                  Build in a style that fits the server aesthetic: industrial,
+                  gritty, functional-but-beautiful.
+                </li>
+                <li>
+                  If in doubt about building standards compliance, ask an admin
+                  first.
+                </li>
+              </ul>
+
+              <h3>Combat</h3>
+              <ul>
+                <li>
+                  Always check your Simulation Distance before engaging in
+                  airship combat.
+                </li>
+                <li>
+                  Coordinate with teammates during raids — solo raiding a
+                  prepared base usually fails.
+                </li>
+                <li>Retreating into your base saves your life. Use it.</li>
+              </ul>
+
+              <div class="info-box" style="margin-top: var(--space-xl)">
+                <div class="info-box__title">📖 Still Confused?</div>
+                <p>
+                  Ask on Discord or check the
+                  <a href="rules.html">full rules page</a>. Staff are here to
+                  help — but only if you ask before doing something
+                  questionable, not after.
+                </p>
+              </div>
+            </section>
+          </article>
+        </div>
+      </div>
+    </main>
+
+    <!-- =====================================================
+       FOOTER
+       ===================================================== -->
+    <footer class="footer" role="contentinfo">
+      <div class="container">
+        <div class="footer__grid">
+          <div class="footer__brand">
+            <a href="index.html" class="footer__logo">
+              <div class="footer__logo-emblem" aria-hidden="true">⚙</div>
+              <span class="footer__logo-text">Gearforged World</span>
+            </a>
+            <p>
+              Aeronautics Civilization: Gearforged World. Minecraft 1.21.1 ·
+              NeoForge.
+            </p>
+          </div>
+          <nav aria-label="Footer navigation">
+            <div class="footer__col-title">Navigate</div>
+            <ul class="footer__links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="civs.html">Civilisations</a></li>
+              <li><a href="rules.html">Rules</a></li>
+              <li><a href="guide.html">Guide</a></li>
+            </ul>
+          </nav>
+          <div>
+            <div class="footer__col-title">Guide Sections</div>
+            <ul class="footer__links">
+              <li><a href="#getting-started">Getting Started</a></li>
+              <li><a href="#physics">Physics Entities</a></li>
+              <li><a href="#war">War & PvP</a></li>
+              <li><a href="#progression">Progression</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <span class="footer__copyright"
+            >© 2025 Aeronautics Civilization: Gearforged World · Not affiliated
+            with Mojang</span
+          >
+          <span class="footer__version">v1.21.1-NF</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/theme.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      /* ---- Reading progress bar ---- */
+      document.addEventListener("DOMContentLoaded", () => {
+        const bar = document.getElementById("reading-progress");
+        if (!bar) return;
+        window.addEventListener(
+          "scroll",
+          () => {
+            const docH =
+              document.documentElement.scrollHeight - window.innerHeight;
+            const pct = docH > 0 ? (window.scrollY / docH) * 100 : 0;
+            bar.style.width = pct + "%";
+          },
+          { passive: true },
+        );
+      });
+
+      /* ---- Active section highlight in sidebar ---- */
+      document.addEventListener("DOMContentLoaded", () => {
+        const sections = document.querySelectorAll(".guide-section");
+        const links = document.querySelectorAll(".guide-nav__item a");
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                links.forEach((l) => l.classList.remove("active"));
+                const link = document.querySelector(
+                  `.guide-nav__item a[href="#${entry.target.id}"]`,
+                );
+                if (link) link.classList.add("active");
+              }
+            });
+          },
+          {
+            rootMargin: `-${64 + 30}px 0px -55% 0px`,
+            threshold: 0,
+          },
+        );
+
+        sections.forEach((s) => observer.observe(s));
+      });
+    </script>
+  </body>
+</html>

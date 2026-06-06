@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Active civilisations on Gearforged World — learn about Kang Tao, Tetonia, Cult Mechanicus, and Transylvania."
+    />
+    <title>Civilisations — Gearforged World</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      /* ---- Page-specific styles ---- */
+      .civ-filter-bar {
+        display: flex;
+        gap: var(--space-sm);
+        flex-wrap: wrap;
+        margin-bottom: var(--space-xl);
+        align-items: center;
+      }
+
+      .civ-filter-bar-label {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-right: var(--space-sm);
+      }
+
+      /* Override btn--secondary padding for filter tags */
+      .civ-filter-btn {
+        font-size: 0.72rem !important;
+        padding: 0.4rem 1rem !important;
+        border-radius: 99px !important;
+      }
+
+      .civ-filter-btn.active {
+        background: rgba(var(--brass-rgb, 196, 155, 69), 0.15) !important;
+        border-color: var(--brass) !important;
+        color: var(--brass-light) !important;
+      }
+
+      /* Policy list inside civ cards */
+      .civ-policy-list li {
+        display: flex !important;
+        gap: 0.5rem !important;
+        align-items: flex-start;
+      }
+
+      .civ-policy-list li::before {
+        content: "▸";
+        color: var(--brass);
+        flex-shrink: 0;
+        margin-top: 0.2em;
+        font-size: 0.8rem;
+      }
+
+      /* "Found your own" CTA card */
+      .found-civ-card {
+        background: var(--bg-card);
+        border: 2px dashed var(--border);
+        border-radius: var(--radius-lg);
+        padding: var(--space-2xl);
+        text-align: center;
+        margin-top: var(--space-xl);
+        transition: border-color var(--transition-base);
+      }
+
+      .found-civ-card:hover {
+        border-color: var(--border-strong);
+      }
+
+      .found-civ-card__icon {
+        font-size: 3rem;
+        display: block;
+        margin-bottom: var(--space-md);
+        opacity: 0.5;
+      }
+
+      /* Civ count header */
+      .civs-header-meta {
+        display: flex;
+        align-items: baseline;
+        gap: var(--space-md);
+        margin-bottom: var(--space-lg);
+      }
+
+      .civs-header-meta h2 {
+        margin: 0;
+      }
+
+      .civ-total-badge {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        color: var(--brass);
+        background: rgba(var(--brass-rgb, 196, 155, 69), 0.1);
+        border: 1px solid var(--border);
+        padding: 0.2rem 0.6rem;
+        border-radius: 3px;
+        letter-spacing: 0.1em;
+      }
+      .civs-grid {
+        display: grid;
+        /* Caps the cards at a reasonable max-width so they don't stretch forever */
+        grid-template-columns: repeat(auto-fill, minmax(300px, 340px));
+        gap: 1.5rem;
+        margin-top: 2rem;
+        width: 100%;
+        /* Centers the entire grid on the page */
+        justify-content: center;
+      }
+
+      /* Ensure the cards look like clickable blocks and fit nice inside the grid slot */
+      .civ-preview-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 2rem;
+        background: var(
+          --bg-card
+        ); /* Fallback if variable is missing: #1a1e24 */
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg, 12px);
+        cursor: pointer;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+        min-height: 220px;
+      }
+
+      /* Add a subtle hover effect to make them feel responsive */
+      .civ-preview-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- =====================================================
+       NAVIGATION
+       ===================================================== -->
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+      <div class="container nav__inner">
+        <a
+          href="index.html"
+          class="nav__logo"
+          aria-label="Gearforged World Home"
+        >
+          <div class="nav__logo-emblem" aria-hidden="true">⚙</div>
+          <div class="nav__logo-text">
+            Gearforged
+            <span class="nav__logo-sub">Aeronautics Civ</span>
+          </div>
+        </a>
+        <ul class="nav__links" role="list">
+          <li><a href="index.html" class="nav__link">Home</a></li>
+          <li><a href="civs.html" class="nav__link">Civilisations</a></li>
+          <li><a href="rules.html" class="nav__link">Rules</a></li>
+          <li><a href="guide.html" class="nav__link">Guide</a></li>
+          <li>
+            <a
+              href="index.html"
+              class="nav__cta nav__link"
+              data-copy-ip="play.gearforged.world"
+              >Join Server</a
+            >
+          </li>
+        </ul>
+        <button
+          class="nav__hamburger"
+          aria-label="Toggle mobile menu"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="nav__mobile">
+      <ul
+        role="list"
+        style="
+          list-style: none;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        "
+      >
+        <li><a href="index.html" class="nav__link">Home</a></li>
+        <li><a href="civs.html" class="nav__link active">Civilisations</a></li>
+        <li><a href="rules.html" class="nav__link">Rules</a></li>
+        <li><a href="guide.html" class="nav__link">Guide</a></li>
+      </ul>
+    </div>
+
+    <!-- =====================================================
+       PAGE HERO
+       ===================================================== -->
+    <div class="page-hero">
+      <div class="page-hero__bg" aria-hidden="true"></div>
+      <div class="container" style="position: relative; z-index: 1">
+        <span class="section-eyebrow">Active Powers</span>
+        <h1>Civilisations</h1>
+        <p
+          style="
+            margin: var(--space-md) auto 0;
+            max-width: 55ch;
+            text-align: center;
+            color: var(--text-secondary);
+          "
+        >
+          Four factions. Competing ideologies. One world to conquer. Study your
+          rivals. Choose your allegiance wisely.
+        </p>
+      </div>
+    </div>
+
+    <!-- =====================================================
+       MAIN CONTENT
+       ===================================================== -->
+    <main>
+      <div class="container" style="padding-bottom: var(--space-3xl)">
+        <!-- Filter bar -->
+        <div class="civ-filter-bar" aria-label="Filter civilisations by tag">
+          <span class="civ-filter-bar-label">Filter:</span>
+          <div
+            id="civ-filters"
+            style="display: flex; gap: 0.5rem; flex-wrap: wrap"
+          >
+            <!-- Populated by civs.js -->
+          </div>
+        </div>
+
+        <!-- Civs container -->
+        <div id="civs-container" aria-label="Civilisation profiles">
+          <div id="civs-preview" class="civs-grid"></div>
+
+          <div
+            id="civs-loading"
+            style="
+              text-align: center;
+              padding: 4rem;
+              color: var(--text-muted);
+              font-family: var(--font-mono);
+            "
+          >
+            <span
+              style="
+                font-size: 3rem;
+                display: block;
+                animation: spin 1.5s linear infinite;
+              "
+              >⚙</span
+            >
+            <p style="margin-top: 1rem; font-size: 0.85rem">
+              Loading civilisations…
+            </p>
+          </div>
+        </div>
+
+        <!-- Found your own civilisation prompt -->
+        <div class="found-civ-card reveal" style="margin-top: var(--space-xl)">
+          <span class="found-civ-card__icon" aria-hidden="true">🏗</span>
+          <h3
+            style="
+              font-family: var(--font-heading);
+              color: var(--text-muted);
+              margin-bottom: var(--space-sm);
+            "
+          >
+            Start Your Own Civilisation
+          </h3>
+          <p
+            style="
+              color: var(--text-muted);
+              font-size: 0.95rem;
+              max-width: 50ch;
+              margin: 0 auto var(--space-lg);
+            "
+          >
+            None of the existing civilisations suit your vision? Gather your
+            allies, claim your land, and forge a new power. Read the guide on
+            civilisation governance first.
+          </p>
+          <a href="guide.html#civs" class="btn btn--secondary"
+            >How to Found a Civilisation</a
+          >
+        </div>
+      </div>
+    </main>
+
+    <!-- =====================================================
+       FOOTER
+       ===================================================== -->
+    <footer class="footer" role="contentinfo">
+      <div class="container">
+        <div class="footer__grid">
+          <div class="footer__brand">
+            <a href="index.html" class="footer__logo">
+              <div class="footer__logo-emblem" aria-hidden="true">⚙</div>
+              <span class="footer__logo-text">Gearforged World</span>
+            </a>
+            <p>
+              Aeronautics Civilization: Gearforged World. Minecraft 1.21.1 ·
+              NeoForge.
+            </p>
+          </div>
+          <nav aria-label="Footer navigation">
+            <div class="footer__col-title">Navigate</div>
+            <ul class="footer__links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="civs.html">Civilisations</a></li>
+              <li><a href="rules.html">Rules</a></li>
+              <li><a href="guide.html">Guide</a></li>
+            </ul>
+          </nav>
+          <div>
+            <div class="footer__col-title">Community</div>
+            <ul class="footer__links">
+              <li>
+                <a
+                  href="https://discord.gg/gearforged"
+                  target="_blank"
+                  rel="noopener"
+                  >Discord</a
+                >
+              </li>
+              <li><a href="rules.html#cat-claims">Claims Rules</a></li>
+              <li><a href="rules.html#cat-war">War Rules</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <span class="footer__copyright"
+            >© 2025 Aeronautics Civilization: Gearforged World · Not affiliated
+            with Mojang</span
+          >
+          <span class="footer__version">v1.21.1-NF</span>
+        </div>
+      </div>
+    </footer>
+
+    <style>
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+
+    <script src="js/theme.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/civs.js"></script>
+    <script>
+      /* ============================================================
+         INIT WITH HASH CHANGE DETECTOR & MANUAL LOADER REMOVAL
+         ============================================================ */
+      const initPage = async () => {
+        const previewContainer = document.getElementById("civs-preview");
+        const detailContainer = document.getElementById("civs-container");
+
+        if (!previewContainer && !detailContainer) return;
+
+        try {
+          const data = await fetchServerData();
+          const civs = data.civilizations;
+          const hash = window.location.hash;
+
+          if (hash && hash.startsWith("#civ-")) {
+            // 1. DETAIL VIEW MODE
+            if (detailContainer) {
+              detailContainer.style.display = "block";
+              if (previewContainer) previewContainer.style.display = "none";
+
+              const civId = hash.replace("#civ-", "");
+              const civ = civs.find((c) => c.id === civId);
+
+              if (civ) {
+                // Clear everything (including old spinner if it's there) to render details
+                detailContainer.innerHTML = "";
+                detailContainer.appendChild(renderCivDetail(civ));
+                detailContainer.appendChild(renderManagementLocked());
+
+                // Scroll smoothly to the civilization profile
+                setTimeout(() => {
+                  const navH = 64 + 20;
+                  const top =
+                    detailContainer.getBoundingClientRect().top +
+                    window.scrollY -
+                    navH;
+                  window.scrollTo({ top, behavior: "smooth" });
+                }, 100);
+              }
+            }
+          } else {
+            // 2. PREVIEW GRID MODE
+            if (previewContainer) {
+              previewContainer.style.display = "grid"; // Forces grid layout
+              if (detailContainer) detailContainer.style.display = "block";
+
+              previewContainer.innerHTML = "";
+              civs.forEach((civ, i) => {
+                previewContainer.appendChild(renderCivPreviewCard(civ, i));
+              });
+            }
+          }
+
+          // --- LOADER CLEANUP ---
+          // Instead of an observer, find the spinner and remove it right here
+          // since we officially know the rendering has completed successfully!
+          const loadingSpinner = document.getElementById("civs-loading");
+          if (loadingSpinner) {
+            loadingSpinner.remove();
+          }
+
+          // Trigger reveal animations if script is loaded
+          if (typeof RevealOnScroll !== "undefined") {
+            RevealOnScroll.init();
+          }
+        } catch (err) {
+          console.error("Failed to load civilization data:", err);
+        }
+      };
+
+      // Run when page loads
+      document.addEventListener("DOMContentLoaded", initPage);
+
+      // Run automatically whenever a user clicks a card (hash changes)
+      window.addEventListener("hashchange", initPage);
+    </script>
+  </body>
+</html>
