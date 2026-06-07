@@ -10,6 +10,17 @@
     <title>Rules — Gearforged World</title>
     <link rel="stylesheet" href="css/style.css" />
     <style>
+      mark {
+        background: #ffd166; /* Your yellow theme color */
+        color: #000000;
+        font-weight: bold;
+
+        /* The Secret Sauce: Wipe out horizontal gaps and structural layout shifts */
+        padding: 0 !important;
+        margin: 0 !important;
+        display: inline;
+        line-height: inherit;
+      }
       /* Rules page extras */
       .rules-search-bar {
         display: flex;
@@ -177,7 +188,7 @@
           "
         >
           <span class="last-updated"
-            >📅 Last updated: 2025 · Rules subject to change</span
+            >📅 Last updated: 6/7/26 · Rules subject to change</span
           >
         </div>
       </div>
@@ -265,21 +276,41 @@
             <div class="rules-search-bar">
               <div
                 class="rules-search"
-                style="flex: 1; position: relative; margin-bottom: 0"
+                style="
+                  flex: 1;
+                  position: relative;
+                  margin-bottom: 0;
+                  display: flex;
+                  align-items: center;
+                  background: var(--bg-card);
+                  border: 1px solid var(--border);
+                  border-radius: var(--radius-md);
+                  padding: 0.25rem;
+                "
               >
-                <span class="rules-search__icon" aria-hidden="true">🔍</span>
                 <input
-                  type="search"
+                  type="text"
                   id="rules-search"
                   class="rules-search__input"
                   placeholder="Search rules…"
                   aria-label="Search rules"
                   autocomplete="off"
+                  style="
+                    flex: 1;
+                    background: transparent;
+                    border: none;
+                    outline: none;
+                    color: var(--text-primary);
+                    font-family: var(--font-body);
+                    font-size: 0.9rem;
+                    padding: 0.5rem;
+                  "
                 />
                 <button
                   class="search-clear-btn"
                   id="search-clear"
                   aria-label="Clear search"
+                  style="margin-right: 0.5rem"
                 >
                   ✕
                 </button>
@@ -388,51 +419,5 @@
     <script src="js/theme.js"></script>
     <script src="js/main.js"></script>
     <script src="js/rules.js"></script>
-    <script>
-      // Show/hide search clear button, update count
-      document.addEventListener("DOMContentLoaded", () => {
-        const searchInput = document.getElementById("rules-search");
-        const clearBtn = document.getElementById("search-clear");
-
-        if (searchInput && clearBtn) {
-          searchInput.addEventListener("input", () => {
-            clearBtn.classList.toggle("visible", searchInput.value.length > 0);
-          });
-        }
-      });
-
-      // Update rule count after data loads
-      document.addEventListener("DOMContentLoaded", () => {
-        // Observer: once rules-container has children, update count
-        const container = document.getElementById("rules-container");
-        const countEl = document.getElementById("rules-count");
-        const loading = document.getElementById("rules-loading");
-
-        const updateCount = () => {
-          if (!countEl) return;
-          const visible = container.querySelectorAll(
-            '.rule-item:not([style*="display: none"])',
-          ).length;
-          const total = container.querySelectorAll(".rule-item").length;
-          if (total > 0) {
-            countEl.textContent =
-              visible === total
-                ? `${total} rules total`
-                : `${visible} of ${total} rules`;
-            if (loading) loading.remove();
-          }
-        };
-
-        const observer = new MutationObserver(updateCount);
-        if (container)
-          observer.observe(container, { childList: true, subtree: true });
-
-        document
-          .getElementById("rules-search")
-          ?.addEventListener("input", () => {
-            setTimeout(updateCount, 250);
-          });
-      });
-    </script>
   </body>
 </html>
