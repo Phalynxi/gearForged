@@ -146,7 +146,7 @@
         },
         {
           "title": "Griefing Restrictions",
-          "intro": "Griefing is limited to: destroying infrastructure that would cripple another team's economy, and damaging physics entities. The following are NOT allowed: levelling entire bases, excessive destruction of aesthetic builds.",
+          "intro": "Griefing is limited to: destroying infrastructure that would cripple another team's economy, and damaging physics entities, using cbc/ TACZ projectiles to break blocks. The following are NOT allowed: levelling entire bases, excessive destruction of aesthetic builds.",
           "rules": [
             "Destroying infrastructure that would cripple another team's economy is permitted.",
             "Damaging physics entities during combat is permitted.",
@@ -179,6 +179,13 @@
           ]
         },
         {
+          "title": "Territorial Conquest",
+          "intro": "If one civilisation wishes to take claimed chunks of another, a territorial conquest can be declared",
+          "rules":[
+            "Once a civ wants to claim another civ’s claimed land, and you want to fight for it, you must declare a territorial conquest war, the attacker will first determine the base they are launching the attack from, and the base or area they want to take. A ‘zone of control’ around each base is 20 chunks (320 blocks) the distance between the two bases' edge of their ‘zone of control’ is ‘no man’s land’. The ‘frontline’ starts at the edge of the attackers ‘zone of control’ and for every time the attacker win a ‘battle’ the frontline pushes 100 blocks towards the defenders, once the  attackers are at the defender’s ‘zone of control’ they may assault the base in the next ‘battle’ and if successful at destroying the respawn point, they have captured the base. If the attackers lose a ‘battle’ they get pushed back 100 blocks, if they are pushed into their zone of control the defenders win and the war is over, attackers must wait at least 3 days before being able to declare another territorial conquest war against the same civ. If the attackers lose the first ‘battle’ they immediately lose. ‘Battles’ take place once a day in no man’s land from when the war starts, each side must declare how many people they are committing to each battle, once the battle starts everyone has one life until they are ‘out’ of said battle. Going outside ‘no man’s land’ during the battle is banned, no restocking. No hiding underground for extended periods of time with the intent of dragging out the battle, avoiding unfavourable fights periodically or to sneak around is allowed. Physics entities may be used during battles but are also legible targets to be destroyed. Using long range strikes via missiles or big cannons are allowed as long as they are stationed in ‘no man’s land’. The distance of ‘zone of control’ and distance the ‘frontline’ moves per battle can be decreased if the two bases are particularly close, but only decreased. During this war, members of both civs are not allowed to set foot on each other’s bases or kill each other outside of battles. ‘Pvp time’ can be used to do strikes on logistics or infrastructure in each other’s bases in the war however, they are not allowed to step foot in each base, it must be done by airplane or missiles. If you crash in an airplane during this time you must immediately leave any area you’re not supposed to be in."
+          ]
+        }
+        {
           "title": "Total War",
           "intro": "If two or more civilisations vote to enable Total War, special rules apply between participating nations.",
           "rules": [
@@ -192,9 +199,8 @@
         {
           "title": "Weapons",
           "rules": [
-            "Nuclear weapons may not be used on claimed chunks unless Total War is active.",
-            "TNT usage is limited to: Maximum 5 TNT, Maximum 2 TNT Minecarts.",
-            "TNT and TNT Minecarts may be used as trigger mechanisms for bombs using CBC shell payloads."
+            "Nuclear weapons may not be used on or within 20 chunks of claimed chunks unless Total War is active.",
+            "TNT and TNT Minecarts may only be used as trigger mechanisms for bombs using CBC shell payloads."
           ]
         },
         {
