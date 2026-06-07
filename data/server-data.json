@@ -2,7 +2,7 @@
   "server": {
     "name": "Aeronautics Civilization: Gearforged World",
     "tagline": "Forge Your Legacy. Command the Skies.",
-    "description": "A modded Minecraft civilization server where empires rise on gears and gunpowder, airships patrol contested skies, and the industrial age is yours to shape.",
+    "description": "A modded Minecraft civilization server where empires rise on gears and gunpowder, airships patrol contested skies, and the industrial age is yours to shape. This server is meant for enjoying yourself in a civilisations environment, over competitiveness is looked down upon",
     "ip": "play.gearforged.world",
     "discord": "https://discord.gg/gearforged",
     "version": "1.21.1 NeoForge"
@@ -92,7 +92,8 @@
           "title": "Bases",
           "rules": [
             "No underground bases.",
-            "Bunkers up to 40 blocks below the surface are permitted if: they are located within your claimed land, they are beneath a base, and they have either a visible entrance or a secret entrance that does not require breaking blocks to access."
+            "Bunkers up to 30 blocks below the surface are permitted if: they are located within your claimed land, they are beneath a base, and they have either a visible entrance or a secret entrance that does not require breaking blocks to access. Bunkers may only contain the following: 2 double chests, beds, decoration blocks that server no use beyond immersion",
+            "No bases in the nether or end"
           ]
         },
         {
@@ -104,7 +105,9 @@
             "No low-effort builds made solely to reserve land.",
             "No \"snake claiming.\"",
             "Do not claim land with the intention of blocking another player.",
-            "Do not claim land within 5 chunks of another player's claim."
+            "Do not claim land within 45 chunks (720 blocks) of another player's claim.",
+            "No claiming chunks in the nether or end",
+            "no claims within 1000 blocks of spawn"
           ]
         },
         {
@@ -184,7 +187,7 @@
           "rules":[
             "Once a civ wants to claim another civ’s claimed land, and you want to fight for it, you must declare a territorial conquest war, the attacker will first determine the base they are launching the attack from, and the base or area they want to take. A ‘zone of control’ around each base is 20 chunks (320 blocks) the distance between the two bases' edge of their ‘zone of control’ is ‘no man’s land’. The ‘frontline’ starts at the edge of the attackers ‘zone of control’ and for every time the attacker win a ‘battle’ the frontline pushes 100 blocks towards the defenders, once the  attackers are at the defender’s ‘zone of control’ they may assault the base in the next ‘battle’ and if successful at destroying the respawn point, they have captured the base. If the attackers lose a ‘battle’ they get pushed back 100 blocks, if they are pushed into their zone of control the defenders win and the war is over, attackers must wait at least 3 days before being able to declare another territorial conquest war against the same civ. If the attackers lose the first ‘battle’ they immediately lose. ‘Battles’ take place once a day in no man’s land from when the war starts, each side must declare how many people they are committing to each battle, once the battle starts everyone has one life until they are ‘out’ of said battle. Going outside ‘no man’s land’ during the battle is banned, no restocking. No hiding underground for extended periods of time with the intent of dragging out the battle, avoiding unfavourable fights periodically or to sneak around is allowed. Physics entities may be used during battles but are also legible targets to be destroyed. Using long range strikes via missiles or big cannons are allowed as long as they are stationed in ‘no man’s land’. The distance of ‘zone of control’ and distance the ‘frontline’ moves per battle can be decreased if the two bases are particularly close, but only decreased. During this war, members of both civs are not allowed to set foot on each other’s bases or kill each other outside of battles. ‘Pvp time’ can be used to do strikes on logistics or infrastructure in each other’s bases in the war however, they are not allowed to step foot in each base, it must be done by airplane or missiles. If you crash in an airplane during this time you must immediately leave any area you’re not supposed to be in."
           ]
-        }
+        },
         {
           "title": "Total War",
           "intro": "If two or more civilisations vote to enable Total War, special rules apply between participating nations.",
@@ -250,7 +253,8 @@
             "Do not ruin the landscape.",
             "No lava casts.",
             "No unnecessary massive holes.",
-            "Terraforming is allowed when it is part of a legitimate build project."
+            "Terraforming is allowed when it is part of a legitimate build project.",
+            "No griefing the bank, vendors or airfield at spawn, other builds at spawn may be built and they will also be protected as long as they're well designed"
           ]
         },
         {
@@ -335,8 +339,8 @@
   ],
   "civilizations": [
     {
-      "id": "kang-tao",
-      "name": "Kang Tao",
+      "id": "usst",
+      "name": "The United Socialists States of Tao",
       "tagline": "Innovation Without Limits",
       "color": "#4A9EFF",
       "accentColor": "#1A5FB0",
@@ -348,7 +352,8 @@
       "foreignPolicy": [
         "A network of strategic outposts across the world.",
         "Control over an archipelago to safeguard classified projects.",
-        "Strong diplomatic and economic relationships with other nations."
+        "Strong diplomatic and economic relationships with other nations.",
+        "A belief that smaller nations should be united under the usst"
       ],
       "nuclearDoctrine": "\"We will not fire the first shot, but we will not allow you to fire a second.\"",
       "recruitment": "We welcome people from all backgrounds. The only individuals not tolerated are those who are intolerant toward others or consistently disruptive to the community.",
